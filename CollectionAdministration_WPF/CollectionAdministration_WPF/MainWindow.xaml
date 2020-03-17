@@ -1,0 +1,275 @@
+﻿<Window x:Class="CollectionAdministration_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CollectionAdministration_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="595.467" Width="726.133" ResizeMode="CanMinimize">
+
+    <Window.Resources>
+
+        <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="3,0,3,1"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Style.Setters>
+                <Setter Property="Padding" Value="0,0,2,0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ComboboxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="235"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Width="235" HorizontalAlignment="Left" Margin="0,0,0,0.4" Grid.RowSpan="2">
+
+            <GroupBox Height="140" Header="Algemeen" Style="{StaticResource GroupBoxStyle}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="Datum:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource TextBoxStyle}"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Style="{StaticResource TextBoxStyle}" IsEnabled="False"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Style="{StaticResource ComboboxStyle}">
+                        <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="Collecte:" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}">
+                        <ComboBoxItem IsSelected="True">1e</ComboBoxItem>
+                        <ComboBoxItem>2e</ComboBoxItem>
+                        <ComboBoxItem>3e</ComboBoxItem>
+                        <ComboBoxItem>4e</ComboBoxItem>
+                        <ComboBoxItem>5e</ComboBoxItem>
+                        <ComboBoxItem>6e</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="4" Content="Beschrijving:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="Test" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}"/>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Height="140" Header="Collectemunten" Style="{StaticResource GroupBoxStyle}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Geel:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="Deze"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="Groen:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="Rood:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="4" Content="Blauw:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="5" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" IsEnabled="False" Background="LightGray" Text="Test" Style="{StaticResource TextBoxStyle}"/>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Height="180" Header="Eurobiljetten" Style="{StaticResource GroupBoxStyle}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="5 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="Deze"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="10 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="3" Content="20 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="4" Content="50 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="5" Content="100 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="6" Content="200 euro:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+                    <TextBox Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Text="Test"/>
+
+                    <Label Grid.Column="0" Grid.Row="7" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" IsEnabled="False" Background="LightGray" Text="Test" Style="{StaticResource TextBoxStyle}"/>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Height="45" Header="Euromunten" Style="{StaticResource GroupBoxStyle}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="6" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" IsEnabled="False" Background="LightGray" Text="Test" Style="{StaticResource TextBoxStyle}"/>
+
+                </Grid>
+
+            </GroupBox>
+
+        </StackPanel>
+
+        <GroupBox Grid.Column="0" Grid.Row="1" Header="Acties: Tellingen" Style="{StaticResource GroupBoxStyle}">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Content="Telling opslaan" Style="{StaticResource ButtonStyle}"/>
+
+                <Button Grid.Row="0" Grid.Column="1" Content="Bereken totalen" Style="{StaticResource ButtonStyle}"/>
+
+            </Grid>
+
+        </GroupBox>
+
+        <DataGrid Grid.Column="1" Grid.Row="0">
+
+        </DataGrid>
+
+        <GroupBox Grid.Column="1" Grid.Row="1" Header="Acties: Opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
+
+            <WrapPanel>
+
+                <Button Content="Tellingen opvragen" Style="{StaticResource ButtonStyle}"/>
+
+                <StackPanel>
+
+                    <Label Content="Filter: Datum" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="Test" Style="{StaticResource TextBoxStyle}"></TextBox>
+
+                </StackPanel>
+
+                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}"/>
+
+                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}"/>
+
+                <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}"/>
+
+            </WrapPanel>
+
+        </GroupBox>
+    </Grid>
+</Window>
