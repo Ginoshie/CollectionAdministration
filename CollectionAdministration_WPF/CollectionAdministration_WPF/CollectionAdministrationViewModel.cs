@@ -570,7 +570,11 @@ namespace CollectionAdministration_WPF
 
         private void UpdateCollectionTotalValue()
         {
-            AmtCollectionTotalValue = amtCollectionCoinsTotalValue + amtEuroBillsTotalValue + AmtEuroCoinsTotalValue;
+            AmtCollectionTotalValue = 
+                amtCollectionCoinsTotalValue + 
+                amtEuroBillsTotalValue + 
+                AmtEuroCoinsTotalValue
+            ;
         }
         
         private double SumCollectionCoinTotalValues()

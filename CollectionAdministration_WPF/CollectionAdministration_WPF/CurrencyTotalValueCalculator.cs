@@ -4,26 +4,26 @@ namespace CollectionAdministration_WPF
 {
     public static class CurrencyTotalValueCalculator
     {
-        public static double CalculateTotalValue(this Currency currency, int value)
+        public static double CalculateTotalValue(this EuroBill currency, int value)
         {
             return value * GetFactor(currency);
         }
 
-        private static double GetFactor(Currency currency)
+        private static double GetFactor(EuroBill currency)
         {
             switch (currency)
             {
-                case Currency.FiveEuroBill:
+                case EuroBill.FiveEuroBill:
                     return 5;
-                case Currency.TenEuroBill:
+                case EuroBill.TenEuroBill:
                     return 10;
-                case Currency.TwentyEuroBill:
+                case EuroBill.TwentyEuroBill:
                     return 20;
-                case Currency.FiftyEuroBill:
+                case EuroBill.FiftyEuroBill:
                     return 50;
-                case Currency.HundredEuroBill:
+                case EuroBill.HundredEuroBill:
                     return 100;
-                case Currency.TwoHundredEuroBill:
+                case EuroBill.TwoHundredEuroBill:
                     return 200;
                 default: throw new InvalidEnumArgumentException(nameof(currency));
             }
