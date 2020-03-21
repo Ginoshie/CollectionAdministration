@@ -86,7 +86,7 @@
                     <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=DtCountDate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Style="{StaticResource TextBoxStyle}" IsEnabled="False"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}"/>
                     <ComboBox Grid.Column="1" Grid.Row="2"  Style="{StaticResource ComboboxStyle}">
@@ -134,22 +134,22 @@
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Geel:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtYellowCollectionCoin}"/>
-                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtYellowCollectionCoinTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtYellowCollectionCoinTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Content="Groen:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtGreenCollectionCoin}"/>
-                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtGreenCollectionCoinTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtGreenCollectionCoinTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Rood:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtRedCollectionCoin}"/>
-                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtRedCollectionCoinTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtRedCollectionCoinTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="4" Content="Blauw:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtBlueCollectionCoin}"/>
-                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtBlueCollectionCoinTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtBlueCollectionCoinTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="5" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtCollectionCoinsTotalValue}" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtCollectionCoinsTotalValue}" Style="{StaticResource TextBoxStyle}"/>
 
                 </Grid>
 
@@ -179,30 +179,30 @@
 
                     <Label Grid.Column="0" Grid.Row="1" Content="5 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtFiveEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtFiveEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtFiveEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Content="10 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtTenEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtTenEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtTenEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="3" Content="20 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtTwentyEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtTwentyEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtTwentyEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="4" Content="50 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtFiftyEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtFiftyEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtFiftyEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="5" Content="100 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtHundredEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtHundredEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtHundredEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="6" Content="200 euro:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=AmtTwoHundredEuroBill}"/>
-                    <TextBox Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtTwoHundredEuroBillTotalValue, Mode=OneWay}"/>
+                    <TextBox Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtTwoHundredEuroBillTotalValue, Mode=OneWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="7" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtEuroBillsTotalValue}" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtEuroBillsTotalValue}" Style="{StaticResource TextBoxStyle}"/>
 
                 </Grid>
 
@@ -242,7 +242,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Column="1" Content="Totaal:" Style="{StaticResource LabelStyle}" Margin="0,4,0.4,3.2"/>
-                    <TextBox Grid.Column="2" Grid.ColumnSpan="2" Background="LightGray" IsEnabled="False" Text="{Binding Path=AmtCollectionTotalValue}" Style="{StaticResource TextBoxStyle}" Margin="0.6,1,1,0.2"/>
+                    <TextBox Grid.Column="2" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtCollectionTotalValue}" Style="{StaticResource TextBoxStyle}" Margin="0.6,1,1,0.2"/>
 
                 </Grid>
 
