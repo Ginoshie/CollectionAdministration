@@ -67,6 +67,7 @@
     <Compile Include="CollectionAdministrationViewModel.cs" />
     <Compile Include="CollectionCoin.cs" />
     <Compile Include="CollectionCoinTotalValueCalculator.cs" />
+    <Compile Include="CollectionRoundDescription.cs" />
     <Compile Include="CurrencyTotalValueCalculator.cs" />
     <Compile Include="CollectionRound.cs" />
     <Compile Include="CommandHandler.cs" />

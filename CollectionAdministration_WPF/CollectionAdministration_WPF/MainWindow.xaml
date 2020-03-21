@@ -86,7 +86,7 @@
                     <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=DtCountDate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Text="{Binding Path=DayOfCountDate, Mode=OneWay}" Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}"/>
                     <ComboBox Grid.Column="1" Grid.Row="2"  Style="{StaticResource ComboboxStyle}">
@@ -96,7 +96,7 @@
                     </ComboBox>
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Collecte:" Style="{StaticResource LabelStyle}"/>
-                    <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}" OpacityMask="Black">
+                    <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}">
                         <ComboBoxItem IsSelected="True">1e</ComboBoxItem>
                         <ComboBoxItem>2e</ComboBoxItem>
                         <ComboBoxItem>3e</ComboBoxItem>

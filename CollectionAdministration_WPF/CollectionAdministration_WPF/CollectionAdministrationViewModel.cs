@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -11,6 +12,8 @@ namespace CollectionAdministration_WPF
 
         #region Metadata
         private DateTime dtCountDate;
+
+        private string dayOfCountDate;
 
         private ChurchCommunity churchCommunity;
 
@@ -82,11 +85,55 @@ namespace CollectionAdministration_WPF
         #region Properties
 
         #region Metadata
-        public DateTime DtCountDate { get => dtCountDate.Date; set => dtCountDate = value; }
+        public DateTime DtCountDate
+        {
+            get => dtCountDate;
+            set
+            {
+                if (dtCountDate == value)
+                {
+                    return;
+                }
+
+                dtCountDate = value;
+
+                UpdateDayOfCountDate();
+            }
+        }
+
+        public string DayOfCountDate
+        {
+            get => dayOfCountDate;
+
+            private set
+            {
+                if (dayOfCountDate == value)
+                {
+                    return;
+                }
+
+                dayOfCountDate = value;
+
+                OnPropertyChanged();
+            }
+    }
 
         public ChurchCommunity ChurchCommunity { get => churchCommunity; set => churchCommunity = value; }
 
-        public CollectionRound CollectionRound { get => collectionRound; set => collectionRound = value; }
+        public CollectionRound CollectionRound
+        {
+            get => collectionRound;
+
+            set
+            {
+                if (collectionRound == value)
+                {
+                    return;
+                }
+
+                collectionRound = value;
+            }
+        }
 
         public string Description { get => description; set => description = value; }
         #endregion
@@ -503,6 +550,8 @@ namespace CollectionAdministration_WPF
         }
         #endregion
 
+        #region Update textbox text methods
+
         #region Update TotalValue methods
         private void UpdateCollectionCoinTotalValue(CollectionCoin collectionCoin)
         {
@@ -600,6 +649,16 @@ namespace CollectionAdministration_WPF
         }
         #endregion
 
+        public void UpdateDayOfCountDate()
+        {
+            string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo.GetDayName(dtCountDate.DayOfWeek).ToString();
+
+            string capitalizedFirstCharDayOfCountDate = unformattedDayOfCountDate.Remove(0, 1).Insert(0, unformattedDayOfCountDate.Substring(0, 1).ToUpper());
+
+            DayOfCountDate = capitalizedFirstCharDayOfCountDate;
+        }
+
+        #endregion
         public ICommand SaveCountResult { get; set; }
 
         private void ExecuteSaveCountResultFlow()
@@ -611,7 +670,7 @@ namespace CollectionAdministration_WPF
 
         private void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
