@@ -7,6 +7,9 @@ namespace CollectionAdministration_WPF
 {
     public class CollectionAdministrationViewModel : INotifyPropertyChanged
     {
+        #region Fields
+
+        #region Metadata
         private DateTime dtCountDate;
 
         private ChurchCommunity churchCommunity;
@@ -14,10 +17,12 @@ namespace CollectionAdministration_WPF
         private CollectionRound collectionRound;
 
         private string description;
+        #endregion
 
+        #region Collection Coin
         private int amtYellowCollectionCoin;
 
-        private double amtYellowCollectionCoinsTotalValue;
+        private double amtYellowCollectionCoinTotalValue;
 
         private int amtGreenCollectionCoin;
 
@@ -31,6 +36,10 @@ namespace CollectionAdministration_WPF
 
         private double amtBlueCollectionCoinTotalValue;
 
+        private double amtCollectionCoinsTotalValue;
+        #endregion
+
+        #region Euro Bill
         private int amtFiveEuroBill;
 
         private double amtFiveEuroBillTotalValue;
@@ -55,9 +64,13 @@ namespace CollectionAdministration_WPF
 
         private double amtTwoHundredEuroBillTotalValue;
 
-        private double amtCurrencryTotalValue;
+        private double amtEuroBillsTotalValue;
+        #endregion
 
-        private int amtCoinsTotalValue;
+        private double amtEuroCoinsTotalValue;
+
+        private double amtCollectionTotalValue;
+        #endregion
 
         public CollectionAdministrationViewModel()
         {
@@ -66,14 +79,19 @@ namespace CollectionAdministration_WPF
             SaveCountResult = new CommandHandler(() => ExecuteSaveCountResultFlow());
         }
 
-        public DateTime DtCountDate { get => dtCountDate; set => dtCountDate = value; }
+        #region Properties
+
+        #region Metadata
+        public DateTime DtCountDate { get => dtCountDate.Date; set => dtCountDate = value; }
 
         public ChurchCommunity ChurchCommunity { get => churchCommunity; set => churchCommunity = value; }
 
         public CollectionRound CollectionRound { get => collectionRound; set => collectionRound = value; }
 
         public string Description { get => description; set => description = value; }
+        #endregion
 
+        #region Collection Coin
         public int AmtYellowCollectionCoin
         {
             get => amtYellowCollectionCoin;
@@ -91,18 +109,18 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public double AmtYellowCollectionCoinsTotalValue
+        public double AmtYellowCollectionCoinTotalValue
         {
-            get => amtYellowCollectionCoinsTotalValue;
+            get => amtYellowCollectionCoinTotalValue;
 
             private set
             {
-                if (amtYellowCollectionCoinsTotalValue == value)
+                if (amtYellowCollectionCoinTotalValue == value)
                 {
                     return;
                 }
 
-                amtYellowCollectionCoinsTotalValue = value;
+                amtYellowCollectionCoinTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -210,6 +228,25 @@ namespace CollectionAdministration_WPF
             }
         }
 
+        public double AmtCollectionCoinsTotalValue
+        {
+            get => amtCollectionCoinsTotalValue;
+
+            set
+            {
+                if(amtCollectionCoinsTotalValue == value)
+                {
+                    return;
+                }
+
+                amtCollectionCoinsTotalValue = value;
+
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+        
+        #region Euro Bill
         public int AmtFiveEuroBill
         {
             get => amtFiveEuroBill;
@@ -223,7 +260,7 @@ namespace CollectionAdministration_WPF
 
                 amtFiveEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.FiveEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.FiveEuroBill);
             }
         }
 
@@ -257,7 +294,7 @@ namespace CollectionAdministration_WPF
 
                 amtTenEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.TenEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.TenEuroBill);
             }
         }
 
@@ -291,7 +328,7 @@ namespace CollectionAdministration_WPF
 
                 amtTwentyEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.TwentyEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.TwentyEuroBill);
             }
         }
 
@@ -325,7 +362,7 @@ namespace CollectionAdministration_WPF
 
                 amtFiftyEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.FiftyEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.FiftyEuroBill);
             }
         }
 
@@ -359,7 +396,7 @@ namespace CollectionAdministration_WPF
 
                 amtHundredEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.HundredEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.HundredEuroBill);
             }
         }
 
@@ -393,7 +430,7 @@ namespace CollectionAdministration_WPF
 
                 amtTwoHundredEuroBill = value;
 
-                UpdateCurrencyTotalValue(Currency.TwoHundredEuroBill);
+                UpdateEuroBillTotalValue(EuroBill.TwoHundredEuroBill);
             }
         }
 
@@ -414,14 +451,65 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtTotalValueCoins { get => amtCoinsTotalValue; set => amtCoinsTotalValue = value; }
+        public double AmtEuroBillsTotalValue
+        {
+            get => amtEuroBillsTotalValue;
+            set
+            {
+                if(amtEuroBillsTotalValue == value)
+                {
+                    return;
+                }
 
+                amtEuroBillsTotalValue = value;
+
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+        
+        public double AmtEuroCoinsTotalValue
+        {
+            get => amtEuroCoinsTotalValue;
+
+            set
+            {
+                if (amtEuroCoinsTotalValue == value)
+                {
+                    return;
+                }
+
+                amtEuroCoinsTotalValue = value;
+
+                UpdateCollectionTotalValue();
+            }
+        }
+
+        public double AmtCollectionTotalValue
+        {
+            get => amtCollectionTotalValue;
+
+            set
+            {
+                if(amtCollectionTotalValue == value)
+                {
+                    return;
+                }
+
+                amtCollectionTotalValue = value;
+
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Update TotalValue methods
         private void UpdateCollectionCoinTotalValue(CollectionCoin collectionCoin)
         {
             switch (collectionCoin)
             {
                 case CollectionCoin.YellowCollectionCoin:
-                    AmtYellowCollectionCoinsTotalValue = collectionCoin.CalculateTotalValue(AmtYellowCollectionCoin);
+                    AmtYellowCollectionCoinTotalValue = collectionCoin.CalculateTotalValue(AmtYellowCollectionCoin);
                     break;
                 case CollectionCoin.GreenCollectionCoin:
                     AmtGreenCollectionCoinTotalValue = collectionCoin.CalculateTotalValue(AmtGreenCollectionCoin);
@@ -434,34 +522,79 @@ namespace CollectionAdministration_WPF
                     break;
                 default: throw new InvalidEnumArgumentException(nameof(collectionCoin));
             }
+
+            UpdateCollectionCoinsTotalValue();
+
+            UpdateCollectionTotalValue();
         }
 
-
-        private void UpdateCurrencyTotalValue(Currency currency)
+        private void UpdateEuroBillTotalValue(EuroBill euroBill)
         {
-            switch (currency)
+            switch (euroBill)
             {
-                case Currency.FiveEuroBill:
-                    AmtFiveEuroBillTotalValue = currency.CalculateTotalValue(AmtFiveEuroBill);
+                case EuroBill.FiveEuroBill:
+                    AmtFiveEuroBillTotalValue = euroBill.CalculateTotalValue(AmtFiveEuroBill);
                     break;
-                case Currency.TenEuroBill:
-                    AmtTenEuroBillTotalValue = currency.CalculateTotalValue(AmtTenEuroBill);
+                case EuroBill.TenEuroBill:
+                    AmtTenEuroBillTotalValue = euroBill.CalculateTotalValue(AmtTenEuroBill);
                     break;
-                case Currency.TwentyEuroBill:
-                    AmtTwentyEuroBillTotalValue = currency.CalculateTotalValue(AmtTwentyEuroBill);
+                case EuroBill.TwentyEuroBill:
+                    AmtTwentyEuroBillTotalValue = euroBill.CalculateTotalValue(AmtTwentyEuroBill);
                     break;
-                case Currency.FiftyEuroBill:
-                    AmtFiftyEuroBillTotalValue = currency.CalculateTotalValue(AmtFiftyEuroBill);
+                case EuroBill.FiftyEuroBill:
+                    AmtFiftyEuroBillTotalValue = euroBill.CalculateTotalValue(AmtFiftyEuroBill);
                     break;
-                case Currency.HundredEuroBill:
-                    AmtHundredEuroBillTotalValue = currency.CalculateTotalValue(AmtHundredEuroBill);
+                case EuroBill.HundredEuroBill:
+                    AmtHundredEuroBillTotalValue = euroBill.CalculateTotalValue(AmtHundredEuroBill);
                     break;
-                case Currency.TwoHundredEuroBill:
-                    AmtTwoHundredEuroBillTotalValue = currency.CalculateTotalValue(AmtTwoHundredEuroBill);
+                case EuroBill.TwoHundredEuroBill:
+                    AmtTwoHundredEuroBillTotalValue = euroBill.CalculateTotalValue(AmtTwoHundredEuroBill);
                     break;
-                default: throw new InvalidEnumArgumentException(nameof(currency));
+                default: throw new InvalidEnumArgumentException(nameof(euroBill));
             }
+
+            UpdateEuroBillsTotalValue();
+
+            UpdateCollectionTotalValue();
         }
+
+        private void UpdateCollectionCoinsTotalValue()
+        {
+            AmtCollectionCoinsTotalValue = SumCollectionCoinTotalValues();
+        }
+
+        private void UpdateEuroBillsTotalValue()
+        {
+            AmtEuroBillsTotalValue = SumEuroBillTotalValues();
+        }
+
+        private void UpdateCollectionTotalValue()
+        {
+            AmtCollectionTotalValue = amtCollectionCoinsTotalValue + amtEuroBillsTotalValue + AmtEuroCoinsTotalValue;
+        }
+        
+        private double SumCollectionCoinTotalValues()
+        {
+            return 
+                AmtYellowCollectionCoinTotalValue + 
+                AmtGreenCollectionCoinTotalValue + 
+                AmtRedCollectionCoinTotalValue + 
+                AmtBlueCollectionCoinTotalValue
+            ;
+        }
+
+        private double SumEuroBillTotalValues()
+        {
+            return
+                AmtFiveEuroBillTotalValue +
+                AmtTenEuroBillTotalValue +
+                AmtTwentyEuroBillTotalValue +
+                AmtFiftyEuroBillTotalValue +
+                AmtHundredEuroBillTotalValue +
+                AmtTwoHundredEuroBillTotalValue
+            ;
+        }
+        #endregion
 
         public ICommand SaveCountResult { get; set; }
 
