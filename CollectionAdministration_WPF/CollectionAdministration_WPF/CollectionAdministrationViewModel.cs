@@ -79,6 +79,8 @@ namespace CollectionAdministration_WPF
         {
             DtCountDate = DateTime.Today;
 
+            SetDefaultDescription();
+
             SaveCountResult = new CommandHandler(() => ExecuteSaveCountResultFlow());
         }
 
@@ -132,10 +134,27 @@ namespace CollectionAdministration_WPF
                 }
 
                 collectionRound = value;
+
+                SetDefaultDescription();
             }
         }
 
-        public string Description { get => description; set => description = value; }
+        public string Description
+        {
+            get => description;
+
+            set
+            {
+                if (description == value)
+                {
+                    return;
+                }
+
+                description = value;
+
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Collection Coin
@@ -620,8 +639,8 @@ namespace CollectionAdministration_WPF
         private void UpdateCollectionTotalValue()
         {
             AmtCollectionTotalValue = 
-                amtCollectionCoinsTotalValue + 
-                amtEuroBillsTotalValue + 
+                AmtCollectionCoinsTotalValue + 
+                AmtEuroBillsTotalValue + 
                 AmtEuroCoinsTotalValue
             ;
         }
@@ -656,6 +675,25 @@ namespace CollectionAdministration_WPF
             string capitalizedFirstCharDayOfCountDate = unformattedDayOfCountDate.Remove(0, 1).Insert(0, unformattedDayOfCountDate.Substring(0, 1).ToUpper());
 
             DayOfCountDate = capitalizedFirstCharDayOfCountDate;
+        }
+
+        public void SetDefaultDescription()
+        {
+            switch (CollectionRound)
+            {
+                case CollectionRound.first:
+                    Description = CollectionRoundDescription.CollectionRound_One.GetDescription();
+                    break;
+                case CollectionRound.second:
+                    Description = CollectionRoundDescription.CollectionRound_Two.GetDescription();
+                    break;
+                case CollectionRound.third:
+                    Description = CollectionRoundDescription.CollectionRound_Three.GetDescription();
+                    break;
+                default:
+                    Description = null;
+                    break;
+            }
         }
 
         #endregion

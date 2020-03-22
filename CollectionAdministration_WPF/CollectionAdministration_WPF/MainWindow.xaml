@@ -6,9 +6,29 @@
         xmlns:local="clr-namespace:CollectionAdministration_WPF"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=local:CollectionAdministrationViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="650" Width="725" ResizeMode="CanMinimize">
+        Title="MainWindow" Height="650" Width="725" MinHeight="650" MinWidth="255" ResizeMode="CanResize">
 
     <Window.Resources>
+        <local:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
+        
+        <ObjectDataProvider x:Key="ChurchCommunities"
+                            MethodName="GetValues" ObjectType="{x:Type local:ChurchCommunity}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:ChurchCommunity"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="CollectionRounds"
+                            MethodName="GetValues" ObjectType="{x:Type local:CollectionRound}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:CollectionRound"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="ShowEnumDescriptionComboBoxTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+        </DataTemplate>
+
         <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
             <Style.Setters>
                 <Setter Property="Margin" Value="3,0,3,1"/>
@@ -70,9 +90,9 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -83,30 +103,27 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Column="0" Grid.Row="0" Content="Datum:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=DtCountDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                    <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DtCountDate}"/>
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Text="{Binding Path=DayOfCountDate, Mode=OneWay}" Style="{StaticResource TextBoxStyle}" IsReadOnly="True"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}"/>
-                    <ComboBox Grid.Column="1" Grid.Row="2"  Style="{StaticResource ComboboxStyle}">
-                        <ComboBoxItem IsSelected="True">1</ComboBoxItem>
-                        <ComboBoxItem>2</ComboBoxItem>
-                        <ComboBoxItem>3</ComboBoxItem>
-                    </ComboBox>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Style="{StaticResource ComboboxStyle}"
+                              ItemsSource="{Binding Source={StaticResource ChurchCommunities}}"
+                              SelectedItem="{Binding Path=ChurchCommunity}"
+                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}"/>
+
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Collecte:" Style="{StaticResource LabelStyle}"/>
-                    <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}">
-                        <ComboBoxItem IsSelected="True">1e</ComboBoxItem>
-                        <ComboBoxItem>2e</ComboBoxItem>
-                        <ComboBoxItem>3e</ComboBoxItem>
-                        <ComboBoxItem>4e</ComboBoxItem>
-                        <ComboBoxItem>5e</ComboBoxItem>
-                        <ComboBoxItem>6e</ComboBoxItem>
-                    </ComboBox>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}"
+                              ItemsSource="{Binding Source={StaticResource CollectionRounds}}"
+                              SelectedItem="{Binding Path=CollectionRound}"
+                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}"/>
+
 
                     <Label Grid.Column="0" Grid.Row="4" Content="Beschrijving:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Path=Description}" Style="{StaticResource TextBoxStyle}"/>
 
                 </Grid>
 
@@ -250,36 +267,21 @@
 
         </StackPanel>
 
-        <GroupBox Grid.Column="0" Grid.Row="1" Header="Acties: Tellingen" Style="{StaticResource GroupBoxStyle}">
-
-            <Grid>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Row="0" Grid.Column="0" Content="Telling opslaan" Command="{Binding Path=SaveCountResult}" Style="{StaticResource ButtonStyle}"/>
-
-                <Button Grid.Row="0" Grid.Column="1" Content="Bereken totalen" Style="{StaticResource ButtonStyle}"/>
-
-            </Grid>
-
-        </GroupBox>
-
         <DataGrid Grid.Column="1" Grid.Row="0">
 
         </DataGrid>
 
-        <GroupBox Grid.Column="1" Grid.Row="1" Header="Acties: Opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties: Opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
 
-            <WrapPanel>
+            <UniformGrid Columns="6">
+
+                <Button Grid.Row="0" Grid.Column="0" Content="Telling opslaan" Command="{Binding Path=SaveCountResult}" Style="{StaticResource ButtonStyle}"/>
 
                 <Button Content="Tellingen opvragen" Style="{StaticResource ButtonStyle}"/>
 
                 <StackPanel>
 
-                    <Label Content="Filter: Datum" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Filter: Datum" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
                     <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
 
                 </StackPanel>
@@ -290,7 +292,7 @@
 
                 <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}"/>
 
-            </WrapPanel>
+            </UniformGrid>
 
         </GroupBox>
     </Grid>

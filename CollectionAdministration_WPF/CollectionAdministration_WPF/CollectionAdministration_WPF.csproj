@@ -71,6 +71,8 @@
     <Compile Include="CurrencyTotalValueCalculator.cs" />
     <Compile Include="CollectionRound.cs" />
     <Compile Include="CommandHandler.cs" />
+    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="EnumToDescriptionConverter.cs" />
     <Compile Include="EuroBill.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
