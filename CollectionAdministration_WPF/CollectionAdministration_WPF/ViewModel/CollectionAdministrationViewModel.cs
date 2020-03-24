@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CollectionAdministration_WPF.Currency;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;

@@ -64,16 +64,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ChurchCommunity.cs" />
-    <Compile Include="CollectionAdministrationViewModel.cs" />
-    <Compile Include="CollectionCoin.cs" />
+    <Compile Include="ViewModel\CollectionAdministrationViewModel.cs" />
+    <Compile Include="Currency\CollectionCoin.cs" />
     <Compile Include="CollectionCoinTotalValueCalculator.cs" />
     <Compile Include="CollectionRoundDescription.cs" />
-    <Compile Include="CurrencyTotalValueCalculator.cs" />
+    <Compile Include="Currency\CurrencyTotalValueCalculator.cs" />
     <Compile Include="CollectionRound.cs" />
     <Compile Include="CommandHandler.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="EnumToDescriptionConverter.cs" />
-    <Compile Include="EuroBill.cs" />
+    <Compile Include="Currency\EuroBill.cs" />
+    <Compile Include="Flows\DeleteCountFlow.cs" />
+    <Compile Include="Flows\InsertCountFlow.cs" />
+    <Compile Include="Flows\SelectCountFlow.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

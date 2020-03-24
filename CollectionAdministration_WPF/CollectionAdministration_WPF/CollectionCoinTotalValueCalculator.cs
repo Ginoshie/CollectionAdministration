@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CollectionAdministration_WPF.Currency;
+using System.ComponentModel;
 
 namespace CollectionAdministration_WPF
 {

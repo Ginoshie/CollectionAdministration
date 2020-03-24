@@ -1,4 +1,4 @@
-﻿namespace CollectionAdministration_WPF
+﻿namespace CollectionAdministration_WPF.Currency
 {
     public enum EuroBill
     {
