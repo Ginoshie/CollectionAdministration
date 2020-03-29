@@ -1,5 +1,6 @@
 ﻿using CollectionAdministration_WPF.Currency;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,8 @@ namespace CollectionAdministration_WPF
         #region Fields
 
         #region Metadata
+        private int collectionCountId;
+
         private DateTime dtCountDate;
 
         private string dayOfCountDate;
@@ -83,11 +86,27 @@ namespace CollectionAdministration_WPF
             SetDefaultDescription();
 
             SaveCountResult = new CommandHandler(() => ExecuteSaveCountResultFlow());
-        }
 
+            DeleteCount = new CommandHandler(() => ExecuteDeleteCountFlow());
+        }
+        
         #region Properties
 
         #region Metadata
+        public int CollectionCountId
+        {
+            get => collectionCountId;
+            set
+            {
+                if (collectionCountId == value)
+                {
+                    return;
+                }
+
+                collectionCountId = value;
+            }
+        }
+
         public DateTime DtCountDate
         {
             get => dtCountDate;
@@ -534,7 +553,8 @@ namespace CollectionAdministration_WPF
             }
         }
         #endregion
-        
+
+        #region Total values
         public double AmtEuroCoinsTotalValue
         {
             get => amtEuroCoinsTotalValue;
@@ -568,6 +588,8 @@ namespace CollectionAdministration_WPF
                 OnPropertyChanged();
             }
         }
+        #endregion
+
         #endregion
 
         #region Update textbox text methods
@@ -696,13 +718,55 @@ namespace CollectionAdministration_WPF
                     break;
             }
         }
-
         #endregion
+
+        #region Commands
         public ICommand SaveCountResult { get; set; }
 
+        public ICommand DeleteCount { get; set; }
+        #endregion
+
+        #region Flows
         private void ExecuteSaveCountResultFlow()
         {
+            DatabaseQueries.InsertCountResult(GetCountResultAsDictionary());
+        }
 
+        private void ExecuteDeleteCountFlow()
+        {
+            DatabaseQueries.DeleteCount(GetPKurrentCount());
+        }
+        #endregion
+
+        private int GetPKurrentCount()
+        {
+            return CollectionCountId;
+        }
+
+        private Dictionary<string, string> GetCountResultAsDictionary()
+        {
+            return new Dictionary<string, string>()
+            {
+                // Meta data
+                { nameof(DtCountDate), $"\'{DtCountDate.Date.ToShortDateString()}\'"},
+                { nameof(ChurchCommunity), $"\'{ChurchCommunity.GetDescription()}\'"},
+                { nameof(CollectionRound), $"\'{CollectionRound.GetDescription()}\'"},
+                { nameof(Description), $"\'{Description}\'"},
+                // Colection coins
+                { nameof(AmtYellowCollectionCoin), AmtYellowCollectionCoin.ToString().Replace(",", ".")},
+                { nameof(AmtGreenCollectionCoin), AmtGreenCollectionCoin.ToString().Replace(",", ".")},
+                { nameof(AmtRedCollectionCoin), AmtRedCollectionCoin.ToString().Replace(",", ".")},
+                { nameof(AmtBlueCollectionCoin), AmtRedCollectionCoin.ToString().Replace(",", ".")},
+                // Euro bills
+                { nameof(AmtFiveEuroBill), AmtFiveEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtTenEuroBill), AmtTenEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtTwentyEuroBill), AmtTwentyEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtFiftyEuroBill), AmtFiftyEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtHundredEuroBill), AmtHundredEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtTwoHundredEuroBill), AmtTwoHundredEuroBill.ToString().Replace(",", ".")},
+                // Euro coins
+                { nameof(AmtEuroCoinsTotalValue), AmtEuroCoinsTotalValue.ToString().Replace(",", ".")}
+            };         
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
