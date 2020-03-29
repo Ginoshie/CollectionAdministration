@@ -67,3 +67,4 @@ dkms.conf
 /.vs/slnx.sqlite
 /.vs/CollectionAdministration_WPF/v15/.suo
 /.vs/VSWorkspaceState.json
+/CollectionAdministration_WPF/packages/
