@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.Converter
 {
-    class EnumToDescriptionConverter : IValueConverter
+    public class EnumToDescriptionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

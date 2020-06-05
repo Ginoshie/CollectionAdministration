@@ -67,7 +67,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ChurchCommunity.cs" />
+    <Compile Include="CollectionCount.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Converter\DataSourcFilledToDataGridVisibilityConverter.cs" />
+    <Compile Include="Converter\NullableDoubleToStringConverter.cs" />
+    <Compile Include="Converter\NullableIntToStringConverter.cs" />
     <Compile Include="DatabaseQueries.cs" />
+    <Compile Include="Validation\NullOrPositiveIntegerAsStringValidationRule.cs" />
+    <Compile Include="Validation\NullOrPositiveDoubleAsStringValidationRule.cs" />
     <Compile Include="ViewModel\CollectionAdministrationViewModel.cs" />
     <Compile Include="Currency\CollectionCoin.cs" />
     <Compile Include="CollectionCoinTotalValueCalculator.cs" />
@@ -76,7 +83,7 @@
     <Compile Include="CollectionRound.cs" />
     <Compile Include="CommandHandler.cs" />
     <Compile Include="EnumExtensions.cs" />
-    <Compile Include="EnumToDescriptionConverter.cs" />
+    <Compile Include="Converter\EnumToDescriptionConverter.cs" />
     <Compile Include="Currency\EuroBill.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

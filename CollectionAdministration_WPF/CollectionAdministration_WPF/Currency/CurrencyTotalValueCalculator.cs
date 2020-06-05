@@ -4,9 +4,14 @@ namespace CollectionAdministration_WPF.Currency
 {
     public static class CurrencyTotalValueCalculator
     {
-        public static double CalculateTotalValue(this EuroBill currency, int value)
+        public static double CalculateTotalValue(this EuroBill currency, string value)
         {
-            return value * GetFactor(currency);
+            if (int.TryParse(value, out int intValue))
+            {
+                return intValue * GetFactor(currency);
+            }
+
+            return 0;
         }
 
         private static double GetFactor(EuroBill currency)

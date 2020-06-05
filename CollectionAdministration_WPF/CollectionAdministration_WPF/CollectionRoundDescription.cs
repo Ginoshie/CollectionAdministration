@@ -4,7 +4,7 @@ namespace CollectionAdministration_WPF
 {
     public enum CollectionRoundDescription
     {
-        [Description("Diakonale coll.")]
+        [Description("Diaconale coll.")]
         CollectionRound_One,
         [Description("Instanthoudings coll.")]
         CollectionRound_Two,

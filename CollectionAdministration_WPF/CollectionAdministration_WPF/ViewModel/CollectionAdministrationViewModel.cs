@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using CollectionAdministration_WPF.Converter;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace CollectionAdministration_WPF
 {
@@ -27,19 +30,19 @@ namespace CollectionAdministration_WPF
         #endregion
 
         #region Collection Coin
-        private int amtYellowCollectionCoin;
+        private string amtYellowCollectionCoin;
 
         private double amtYellowCollectionCoinTotalValue;
 
-        private int amtGreenCollectionCoin;
+        private string amtGreenCollectionCoin;
 
         private double amtGreenCollectionCoinTotalValue;
 
-        private int amtRedCollectionCoin;
+        private string amtRedCollectionCoin;
 
         private double amtRedCollectionCoinTotalValue;
 
-        private int amtBlueCollectionCoin;
+        private string amtBlueCollectionCoin;
 
         private double amtBlueCollectionCoinTotalValue;
 
@@ -47,36 +50,38 @@ namespace CollectionAdministration_WPF
         #endregion
 
         #region Euro Bill
-        private int amtFiveEuroBill;
+        private string amtFiveEuroBill;
 
         private double amtFiveEuroBillTotalValue;
 
-        private int amtTenEuroBill;
+        private string amtTenEuroBill;
 
         private double amtTenEuroBillTotalValue;
 
-        private int amtTwentyEuroBill;
+        private string amtTwentyEuroBill;
 
         private double amtTwentyEuroBillTotalValue;
 
-        private int amtFiftyEuroBill;
+        private string amtFiftyEuroBill;
 
         private double amtFiftyEuroBillTotalValue;
 
-        private int amtHundredEuroBill;
+        private string amtHundredEuroBill;
 
         private double amtHundredEuroBillTotalValue;
 
-        private int amtTwoHundredEuroBill;
+        private string amtTwoHundredEuroBill;
 
         private double amtTwoHundredEuroBillTotalValue;
 
         private double amtEuroBillsTotalValue;
         #endregion
 
-        private double amtEuroCoinsTotalValue;
+        private string amtEuroCoinsTotalValue;
 
         private double amtCollectionTotalValue;
+
+        private List<CollectionCount> collectionCounts;
         #endregion
 
         public CollectionAdministrationViewModel()
@@ -85,11 +90,15 @@ namespace CollectionAdministration_WPF
 
             SetDefaultDescription();
 
-            SaveCountResult = new CommandHandler(() => ExecuteSaveCountResultFlow());
+            GetCounts = new CommandHandler(() => ExecuteCountsFlow());
+
+            SetSelectedDataGridRowAsCurrentCount = new CommandHandler(() => ExecuteSetSelectedRowAsCurrentCount());
+
+            SaveCount = new CommandHandler(() => ExecuteSaveCountFlow());
 
             DeleteCount = new CommandHandler(() => ExecuteDeleteCountFlow());
         }
-        
+
         #region Properties
 
         #region Metadata
@@ -138,9 +147,13 @@ namespace CollectionAdministration_WPF
 
                 OnPropertyChanged();
             }
-    }
+        }
 
-        public ChurchCommunity ChurchCommunity { get => churchCommunity; set => churchCommunity = value; }
+        public ChurchCommunity ChurchCommunity
+        {
+            get => churchCommunity;
+            set => churchCommunity = value;
+        }
 
         public CollectionRound CollectionRound
         {
@@ -178,18 +191,28 @@ namespace CollectionAdministration_WPF
         #endregion
 
         #region Collection Coin
-        public int AmtYellowCollectionCoin
+        public string AmtYellowCollectionCoin
         {
-            get => amtYellowCollectionCoin;
+            get => amtYellowCollectionCoin ?? "0";
 
             set
             {
-                if (amtYellowCollectionCoin == value)
+                string trimmedValue = value.Trim();
+
+                if (amtYellowCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
-                amtYellowCollectionCoin = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtYellowCollectionCoin = "0";
+                }
+
+                amtYellowCollectionCoin = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateCollectionCoinTotalValue(CollectionCoin.YellowCollectionCoin);
             }
@@ -212,18 +235,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtGreenCollectionCoin
+        public string AmtGreenCollectionCoin
         {
-            get => amtGreenCollectionCoin;
+            get => amtGreenCollectionCoin ?? "0";
 
             set
             {
-                if (amtGreenCollectionCoin == value)
+                string trimmedValue = value.Trim();
+
+                if (amtGreenCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
-                amtGreenCollectionCoin = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtGreenCollectionCoin = "0";
+                }
+
+                amtGreenCollectionCoin = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateCollectionCoinTotalValue(CollectionCoin.GreenCollectionCoin);
             }
@@ -246,18 +279,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtRedCollectionCoin
+        public string AmtRedCollectionCoin
         {
-            get => amtRedCollectionCoin;
+            get => amtRedCollectionCoin ?? "0";
 
             set
             {
-                if (amtRedCollectionCoin == value)
+                string trimmedValue = value.Trim();
+
+                if (amtRedCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
-                amtRedCollectionCoin = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtRedCollectionCoin = "0";
+                }
+
+                amtRedCollectionCoin = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateCollectionCoinTotalValue(CollectionCoin.RedCollectionCoin);
             }
@@ -280,18 +323,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtBlueCollectionCoin
+        public string AmtBlueCollectionCoin
         {
-            get => amtBlueCollectionCoin;
+            get => amtBlueCollectionCoin ?? "0";
 
             set
             {
-                if (amtBlueCollectionCoin == value)
+                string trimmedValue = value.Trim();
+
+                if (amtBlueCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
-                amtBlueCollectionCoin = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtBlueCollectionCoin = "0";
+                }
+
+                amtBlueCollectionCoin = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateCollectionCoinTotalValue(CollectionCoin.BlueCollectionCoin);
             }
@@ -320,7 +373,7 @@ namespace CollectionAdministration_WPF
 
             set
             {
-                if(amtCollectionCoinsTotalValue == value)
+                if (amtCollectionCoinsTotalValue == value)
                 {
                     return;
                 }
@@ -331,20 +384,30 @@ namespace CollectionAdministration_WPF
             }
         }
         #endregion
-        
+
         #region Euro Bill
-        public int AmtFiveEuroBill
+        public string AmtFiveEuroBill
         {
-            get => amtFiveEuroBill;
+            get => amtFiveEuroBill ?? "0";
 
             set
             {
-                if (amtFiveEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtFiveEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtFiveEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtFiveEuroBill = "0";
+                }
+
+                amtFiveEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.FiveEuroBill);
             }
@@ -367,18 +430,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtTenEuroBill
+        public string AmtTenEuroBill
         {
-            get => amtTenEuroBill;
+            get => amtTenEuroBill ?? "0";
 
             set
             {
-                if (amtTenEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtTenEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtTenEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtTenEuroBill = "0";
+                }
+
+                amtTenEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.TenEuroBill);
             }
@@ -401,18 +474,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtTwentyEuroBill
+        public string AmtTwentyEuroBill
         {
-            get => amtTwentyEuroBill;
+            get => amtTwentyEuroBill ?? "0";
 
             set
             {
-                if (amtTwentyEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtTwentyEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtTwentyEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtTwentyEuroBill = "0";
+                }
+
+                amtTwentyEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.TwentyEuroBill);
             }
@@ -424,29 +507,39 @@ namespace CollectionAdministration_WPF
 
             private set
             {
-                if (amtTenEuroBillTotalValue == value)
+                if (amtTwentyEuroBillTotalValue == value)
                 {
                     return;
                 }
 
                 amtTwentyEuroBillTotalValue = value;
-                
+
                 OnPropertyChanged();
             }
         }
-        
-        public int AmtFiftyEuroBill
+
+        public string AmtFiftyEuroBill
         {
-            get => amtFiftyEuroBill;
+            get => amtFiftyEuroBill ?? "0";
 
             set
             {
-                if (amtFiftyEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtFiftyEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtFiftyEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtFiftyEuroBill = "0";
+                }
+
+                amtFiftyEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.FiftyEuroBill);
             }
@@ -469,18 +562,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtHundredEuroBill
+        public string AmtHundredEuroBill
         {
-            get => amtHundredEuroBill;
+            get => amtHundredEuroBill ?? "0";
 
             set
             {
-                if (amtHundredEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtHundredEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtHundredEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtHundredEuroBill = "0";
+                }
+
+                amtHundredEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.HundredEuroBill);
             }
@@ -503,18 +606,28 @@ namespace CollectionAdministration_WPF
             }
         }
 
-        public int AmtTwoHundredEuroBill
+        public string AmtTwoHundredEuroBill
         {
-            get => amtTwoHundredEuroBill;
+            get => amtTwoHundredEuroBill ?? "0";
 
             set
             {
-                if (amtTwoHundredEuroBill == value)
+                string trimmedValue = value.Trim();
+
+                if (amtTwoHundredEuroBill == trimmedValue)
                 {
                     return;
                 }
 
-                amtTwoHundredEuroBill = value;
+                if (trimmedValue == null ||
+                trimmedValue == "")
+                {
+                    amtTwoHundredEuroBill = "0";
+                }
+
+                amtTwoHundredEuroBill = trimmedValue;
+
+                OnPropertyChanged();
 
                 UpdateEuroBillTotalValue(EuroBill.TwoHundredEuroBill);
             }
@@ -542,7 +655,7 @@ namespace CollectionAdministration_WPF
             get => amtEuroBillsTotalValue;
             set
             {
-                if(amtEuroBillsTotalValue == value)
+                if (amtEuroBillsTotalValue == value)
                 {
                     return;
                 }
@@ -554,19 +667,30 @@ namespace CollectionAdministration_WPF
         }
         #endregion
 
-        #region Total values
-        public double AmtEuroCoinsTotalValue
+        public string AmtEuroCoinsTotalValue
         {
-            get => amtEuroCoinsTotalValue;
+            get => amtEuroCoinsTotalValue ?? "0";
 
             set
             {
-                if (amtEuroCoinsTotalValue == value)
+                string trimmedValue = value.Trim();
+
+                if (amtEuroCoinsTotalValue == trimmedValue)
                 {
                     return;
                 }
 
-                amtEuroCoinsTotalValue = value;
+                if (trimmedValue == null ||
+                    trimmedValue == "")
+                {
+                    amtEuroCoinsTotalValue = "0";
+                }
+                else
+                {
+                    amtEuroCoinsTotalValue = FormatUserInputPositiveDouble(value);
+                }
+
+                OnPropertyChanged();
 
                 UpdateCollectionTotalValue();
             }
@@ -578,7 +702,7 @@ namespace CollectionAdministration_WPF
 
             set
             {
-                if(amtCollectionTotalValue == value)
+                if (amtCollectionTotalValue == value)
                 {
                     return;
                 }
@@ -588,9 +712,49 @@ namespace CollectionAdministration_WPF
                 OnPropertyChanged();
             }
         }
+
+        public CollectionCount CountSelectedInDataGrid { get; set; }
+
+        public List<CollectionCount> CollectionCounts
+        {
+            get => collectionCounts;
+
+            set
+            {
+                if(collectionCounts == value)
+                {
+                    return;
+                }
+
+                collectionCounts = value;
+
+                OnPropertyChanged();
+
+                OnPropertyChanged(nameof(DataGridVisibility));
+            }
+        }
+
+        public Visibility DataGridVisibility
+        {
+            get
+            {
+                if (CollectionCounts == null || 
+                    CollectionCounts.Count == 0)
+                {
+                    return Visibility.Hidden;
+                }
+
+                return Visibility.Visible;
+            }
+        }
         #endregion
 
-        #endregion
+        private string FormatUserInputPositiveDouble(string value)
+        {
+            value = value.Replace(".", ",");
+
+            return value;
+        }
 
         #region Update textbox text methods
 
@@ -661,10 +825,12 @@ namespace CollectionAdministration_WPF
 
         private void UpdateCollectionTotalValue()
         {
+            double.TryParse(AmtEuroCoinsTotalValue, out double amtEuroCoinsTotalValue);
+
             AmtCollectionTotalValue = 
                 AmtCollectionCoinsTotalValue + 
-                AmtEuroBillsTotalValue + 
-                AmtEuroCoinsTotalValue
+                AmtEuroBillsTotalValue +
+                amtEuroCoinsTotalValue
             ;
         }
         
@@ -691,7 +857,7 @@ namespace CollectionAdministration_WPF
         }
         #endregion
 
-        public void UpdateDayOfCountDate()
+        private void UpdateDayOfCountDate()
         {
             string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo.GetDayName(dtCountDate.DayOfWeek).ToString();
 
@@ -721,26 +887,70 @@ namespace CollectionAdministration_WPF
         #endregion
 
         #region Commands
-        public ICommand SaveCountResult { get; set; }
+        public ICommand SaveCount { get; set; }
+
+        public ICommand GetCounts { get; set; }
+
+        public ICommand SetSelectedDataGridRowAsCurrentCount { get; set; }
 
         public ICommand DeleteCount { get; set; }
         #endregion
 
         #region Flows
-        private void ExecuteSaveCountResultFlow()
+        private void ExecuteSaveCountFlow()
         {
             DatabaseQueries.InsertCountResult(GetCountResultAsDictionary());
         }
 
+        private void ExecuteCountsFlow()
+        {
+            FillCollectionCountDataGrid(RetrieveCollectionCounts());
+        }
+
+        private void ExecuteSetSelectedRowAsCurrentCount()
+        {
+            FillCurrentCountFields(CountSelectedInDataGrid);
+        }
+
         private void ExecuteDeleteCountFlow()
         {
-            DatabaseQueries.DeleteCount(GetPKurrentCount());
+            DatabaseQueries.DeleteCount(GetPKSelectedCount());
         }
         #endregion
 
-        private int GetPKurrentCount()
+        #region DataBase related methods
+        private int GetPKSelectedCount()
         {
             return CollectionCountId;
+        }
+
+        private List<CollectionCount> RetrieveCollectionCounts()
+        {
+            return DatabaseQueries.GetCollectionCounts();
+        }
+
+        private void FillCollectionCountDataGrid(List<CollectionCount> collectionCounts)
+        {
+            CollectionCounts = collectionCounts;
+        }
+
+        private void FillCurrentCountFields(CollectionCount collectionCount)
+        {
+            DtCountDate = collectionCount.DtCountDate;
+            ChurchCommunity = collectionCount.ChurchCommunity; //(ChurchCommunity)Enum.Parse(typeof(ChurchCommunity), collectionCount.ChurchCommunity);
+            CollectionRound = collectionCount.CollectionRound; //(CollectionRound)Enum.Parse(typeof(CollectionRound), collectionCount.CollectionRound);
+            Description = collectionCount.Description;
+            AmtYellowCollectionCoin = collectionCount.AmtYellowCollectionCoin;
+            AmtGreenCollectionCoin = collectionCount.AmtGreenCollectionCoin;
+            AmtRedCollectionCoin = collectionCount.AmtRedCollectionCoin;
+            AmtBlueCollectionCoin = collectionCount.AmtBlueCollectionCoin;
+            AmtFiveEuroBill = collectionCount.AmtFiveEuroBill;
+            AmtTenEuroBill = collectionCount.AmtTenEuroBill;
+            AmtTwentyEuroBill = collectionCount.AmtTwentyEuroBill;
+            AmtFiftyEuroBill = collectionCount.AmtFiftyEuroBill;
+            AmtHundredEuroBill = collectionCount.AmtHundredEuroBill;
+            AmtTwoHundredEuroBill = collectionCount.AmtTwoHundredEuroBill;
+            AmtEuroCoinsTotalValue = collectionCount.AmtEuroCoinsTotalValue;
         }
 
         private Dictionary<string, string> GetCountResultAsDictionary()
@@ -749,8 +959,8 @@ namespace CollectionAdministration_WPF
             {
                 // Meta data
                 { nameof(DtCountDate), $"\'{DtCountDate.Date.ToShortDateString()}\'"},
-                { nameof(ChurchCommunity), $"\'{ChurchCommunity.GetDescription()}\'"},
-                { nameof(CollectionRound), $"\'{CollectionRound.GetDescription()}\'"},
+                { nameof(ChurchCommunity), $"\'{ChurchCommunity}\'"},
+                { nameof(CollectionRound), $"\'{CollectionRound}\'"},
                 { nameof(Description), $"\'{Description}\'"},
                 // Colection coins
                 { nameof(AmtYellowCollectionCoin), AmtYellowCollectionCoin.ToString().Replace(",", ".")},
@@ -768,6 +978,7 @@ namespace CollectionAdministration_WPF
                 { nameof(AmtEuroCoinsTotalValue), AmtEuroCoinsTotalValue.ToString().Replace(",", ".")}
             };         
         }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 

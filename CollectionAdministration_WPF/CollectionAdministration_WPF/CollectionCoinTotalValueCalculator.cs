@@ -5,9 +5,14 @@ namespace CollectionAdministration_WPF
 {
     public static class CollectionCoinTotalValueCalculator
     {
-        public static double CalculateTotalValue(this CollectionCoin collectionCoin, int value)
+        public static double CalculateTotalValue(this CollectionCoin collectionCoin, string value)
         {
-            return value * GetFactor(collectionCoin);
+            if (int.TryParse(value, out int intValue))
+            {
+                return intValue * GetFactor(collectionCoin);
+            }
+
+            return 0;
         }
 
         private static double GetFactor(CollectionCoin collectionCoin)
