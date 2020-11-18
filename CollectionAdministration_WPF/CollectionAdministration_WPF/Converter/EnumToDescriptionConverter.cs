@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using CollectionAdministration_WPF.Extensions;
 
 namespace CollectionAdministration_WPF.Converter
 {

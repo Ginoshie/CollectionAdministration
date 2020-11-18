@@ -1,4 +1,4 @@
-﻿namespace CollectionAdministration_WPF.Currency
+﻿namespace CollectionAdministration_WPF.Enums
 {
     public enum CollectionCoin
     {

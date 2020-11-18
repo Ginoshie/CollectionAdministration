@@ -25,12 +25,12 @@ namespace CollectionAdministration_WPF.Validation
 
                     if (!int.TryParse(stringValue, out int intValue))
                     {
-                        return new ValidationResult(false, Constants.POSITIVE_INT_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
+                        return new ValidationResult(false, Constants.Constants.POSITIVE_INT_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
                     }
 
                     if (intValue < 0)
                     {
-                        return new ValidationResult(false, Constants.POSITIVE_INT_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
+                        return new ValidationResult(false, Constants.Constants.POSITIVE_INT_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
                     }
 
                     return ValidationResult.ValidResult;

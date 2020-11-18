@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.Enums
 {
     public enum CollectionRoundDescription
     {
         [Description("Diaconale coll.")]
-        CollectionRound_One,
+        CollectionRoundOne,
         [Description("Instanthoudings coll.")]
-        CollectionRound_Two,
+        CollectionRoundTwo,
         [Description("Bestemmings coll.")]
-        CollectionRound_Three
+        CollectionRoundThree
     }
 }

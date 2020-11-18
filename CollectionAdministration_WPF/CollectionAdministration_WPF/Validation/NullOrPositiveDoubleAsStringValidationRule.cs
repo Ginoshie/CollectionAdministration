@@ -27,12 +27,12 @@ namespace CollectionAdministration_WPF.Validation
                     if (!double.TryParse(stringValue, out double doubleValue) ||
                         Regex.Matches(stringValue, ",").Count > 1)
                     {
-                        return new ValidationResult(false, Constants.POSITIVE_DOUBLE_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
+                        return new ValidationResult(false, Constants.Constants.POSITIVE_DOUBLE_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
                     }
 
                     if (doubleValue < 0)
                     {
-                        return new ValidationResult(false, Constants.POSITIVE_DOUBLE_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
+                        return new ValidationResult(false, Constants.Constants.POSITIVE_DOUBLE_OR_EMPTY_STRING_REQUIRED_VALIDATION_MESSAGE);
                     }
 
                     return ValidationResult.ValidResult;

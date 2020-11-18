@@ -1,20 +1,20 @@
 ﻿using System.ComponentModel;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.Enums
 {
     public enum CollectionRound
     {
         [Description("1e")]
-        first,
+        First,
         [Description("2e")]
-        second,
+        Second,
         [Description("3e")]
-        third,
+        Third,
         [Description("4e")]
-        fourth,
+        Fourth,
         [Description("5e")]
-        fifth,
+        Fifth,
         [Description("6e")]
-        sixth
+        Sixth
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:CollectionAdministration_WPF"
         xmlns:converter="clr-namespace:CollectionAdministration_WPF.Converter"
         xmlns:validation="clr-namespace:CollectionAdministration_WPF.Validation"
+        xmlns:enums="clr-namespace:CollectionAdministration_WPF.Enums"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=local:CollectionAdministrationViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="650" Width="725" MinHeight="650" MinWidth="255" ResizeMode="CanResize">
@@ -14,16 +15,16 @@
         <converter:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
 
         <ObjectDataProvider x:Key="ChurchCommunities"
-                            MethodName="GetValues" ObjectType="{x:Type local:ChurchCommunity}">
+                            MethodName="GetValues" ObjectType="{x:Type enums:ChurchCommunity}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:ChurchCommunity"/>
+                <x:Type TypeName="enums:ChurchCommunity"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
         <ObjectDataProvider x:Key="CollectionRounds"
-                            MethodName="GetValues" ObjectType="{x:Type local:CollectionRound}">
+                            MethodName="GetValues" ObjectType="{x:Type enums:CollectionRound}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:CollectionRound"/>
+                <x:Type TypeName="enums:CollectionRound"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 

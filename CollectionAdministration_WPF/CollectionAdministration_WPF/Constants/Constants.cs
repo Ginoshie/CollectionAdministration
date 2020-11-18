@@ -1,4 +1,4 @@
-﻿namespace CollectionAdministration_WPF
+﻿namespace CollectionAdministration_WPF.Constants
 {
     public static class Constants
     {

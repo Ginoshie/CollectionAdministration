@@ -1,7 +1,7 @@
-﻿using CollectionAdministration_WPF.Currency;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using CollectionAdministration_WPF.Enums;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.Calculators
 {
     public static class CollectionCoinTotalValueCalculator
     {

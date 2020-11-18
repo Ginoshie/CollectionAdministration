@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using CollectionAdministration_WPF.DTO;
+using CollectionAdministration_WPF.Enums;
 
 namespace CollectionAdministration_WPF
 {
     public static class DatabaseQueries
     {
-        private static readonly string connectionString;
+        private static readonly string ConnectionString;
 
         static DatabaseQueries()
         {
-            connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0.;Data Source=.\CollectionCount.mdb;User Id=admin; Password=;";
+            ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0.;Data Source=.\CollectionCount.mdb;User Id=admin; Password=;";
         }
 
         public static void InsertCountResult(Dictionary<string, string> countResult)
@@ -30,7 +32,7 @@ namespace CollectionAdministration_WPF
 
             string insertString = $"insert into CollectionCount ({fields}) values ({formattedValues});";
 
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 OleDbCommand cmd = new OleDbCommand(insertString, connection);
 
@@ -46,7 +48,7 @@ namespace CollectionAdministration_WPF
         {
             string deleteString = $"delete from CollectionCount where id={pkCountResult};";
 
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 OleDbCommand command = new OleDbCommand(deleteString, connection);
 
@@ -62,7 +64,7 @@ namespace CollectionAdministration_WPF
         {
             string selectCountString = $"select * from TellingCollecte where CollectionCountId = {collectionCountId};";
 
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 OleDbCommand command = new OleDbCommand(selectCountString);
 
@@ -82,7 +84,7 @@ namespace CollectionAdministration_WPF
 
             string selectAllString = $"select * from CollectionCount;";
 
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
             {
                 OleDbCommand command = new OleDbCommand(selectAllString, connection);
 

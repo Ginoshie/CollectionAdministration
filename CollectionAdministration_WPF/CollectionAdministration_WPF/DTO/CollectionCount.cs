@@ -1,6 +1,7 @@
 ﻿using System;
+using CollectionAdministration_WPF.Enums;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.DTO
 {
     public class CollectionCount
     {

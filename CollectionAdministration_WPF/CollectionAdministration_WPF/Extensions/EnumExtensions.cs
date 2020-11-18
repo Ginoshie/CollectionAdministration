@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.Extensions
 {
     public static class EnumExtensions
     {

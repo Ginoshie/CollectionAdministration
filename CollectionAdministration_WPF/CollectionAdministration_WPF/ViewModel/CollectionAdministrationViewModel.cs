@@ -1,5 +1,4 @@
-﻿using CollectionAdministration_WPF.Currency;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -8,6 +7,10 @@ using System.Windows.Input;
 using CollectionAdministration_WPF.Converter;
 using System.Text.RegularExpressions;
 using System.Windows;
+using CollectionAdministration_WPF.Calculators;
+using CollectionAdministration_WPF.DTO;
+using CollectionAdministration_WPF.Enums;
+using CollectionAdministration_WPF.Extensions;
 
 namespace CollectionAdministration_WPF
 {
@@ -870,14 +873,14 @@ namespace CollectionAdministration_WPF
         {
             switch (CollectionRound)
             {
-                case CollectionRound.first:
-                    Description = CollectionRoundDescription.CollectionRound_One.GetDescription();
+                case CollectionRound.First:
+                    Description = CollectionRoundDescription.CollectionRoundOne.GetDescription();
                     break;
-                case CollectionRound.second:
-                    Description = CollectionRoundDescription.CollectionRound_Two.GetDescription();
+                case CollectionRound.Second:
+                    Description = CollectionRoundDescription.CollectionRoundTwo.GetDescription();
                     break;
-                case CollectionRound.third:
-                    Description = CollectionRoundDescription.CollectionRound_Three.GetDescription();
+                case CollectionRound.Third:
+                    Description = CollectionRoundDescription.CollectionRoundThree.GetDescription();
                     break;
                 default:
                     Description = null;
