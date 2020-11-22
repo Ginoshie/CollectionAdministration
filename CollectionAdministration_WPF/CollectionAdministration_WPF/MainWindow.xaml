@@ -7,8 +7,9 @@
         xmlns:converter="clr-namespace:CollectionAdministration_WPF.Converter"
         xmlns:validation="clr-namespace:CollectionAdministration_WPF.Validation"
         xmlns:enums="clr-namespace:CollectionAdministration_WPF.Enums"
+        xmlns:viewModel="clr-namespace:CollectionAdministration_WPF.ViewModel"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=local:CollectionAdministrationViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=viewModel:CollectionAdministrationViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="650" Width="725" MinHeight="650" MinWidth="255" ResizeMode="CanResize">
 
     <Window.Resources>

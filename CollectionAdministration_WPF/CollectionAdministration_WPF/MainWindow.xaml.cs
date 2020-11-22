@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
+using CollectionAdministration_WPF.ViewModel;
 
 namespace CollectionAdministration_WPF
 {

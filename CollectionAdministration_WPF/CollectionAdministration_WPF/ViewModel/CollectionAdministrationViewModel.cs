@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using CollectionAdministration_WPF.Converter;
-using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 using CollectionAdministration_WPF.Calculators;
 using CollectionAdministration_WPF.DTO;
 using CollectionAdministration_WPF.Enums;
 using CollectionAdministration_WPF.Extensions;
 
-namespace CollectionAdministration_WPF
+namespace CollectionAdministration_WPF.ViewModel
 {
     public class CollectionAdministrationViewModel : INotifyPropertyChanged
     {
@@ -93,13 +91,13 @@ namespace CollectionAdministration_WPF
 
             SetDefaultDescription();
 
-            GetCounts = new CommandHandler(() => ExecuteCountsFlow());
+            GetCounts = new CommandHandler(ExecuteCountsFlow);
 
             SetSelectedDataGridRowAsCurrentCount = new CommandHandler(() => ExecuteSetSelectedRowAsCurrentCount());
 
-            SaveCount = new CommandHandler(() => ExecuteSaveCountFlow());
+            SaveCount = new CommandHandler(ExecuteSaveCountFlow);
 
-            DeleteCount = new CommandHandler(() => ExecuteDeleteCountFlow());
+            DeleteCount = new CommandHandler(ExecuteDeleteCountFlow);
         }
 
         #region Properties
@@ -200,15 +198,14 @@ namespace CollectionAdministration_WPF
 
             set
             {
-                string trimmedValue = value.Trim();
+                string trimmedValue = value?.Trim();
 
                 if (amtYellowCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtYellowCollectionCoin = "0";
                 }
@@ -251,8 +248,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtGreenCollectionCoin = "0";
                 }
@@ -295,8 +291,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtRedCollectionCoin = "0";
                 }
@@ -339,8 +334,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtBlueCollectionCoin = "0";
                 }
@@ -402,8 +396,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtFiveEuroBill = "0";
                 }
@@ -446,8 +439,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtTenEuroBill = "0";
                 }
@@ -490,8 +482,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtTwentyEuroBill = "0";
                 }
@@ -534,8 +525,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtFiftyEuroBill = "0";
                 }
@@ -578,8 +568,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtHundredEuroBill = "0";
                 }
@@ -622,8 +611,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtTwoHundredEuroBill = "0";
                 }
@@ -683,8 +671,7 @@ namespace CollectionAdministration_WPF
                     return;
                 }
 
-                if (trimmedValue == null ||
-                    trimmedValue == "")
+                if (string.IsNullOrEmpty(trimmedValue))
                 {
                     amtEuroCoinsTotalValue = "0";
                 }
@@ -828,12 +815,12 @@ namespace CollectionAdministration_WPF
 
         private void UpdateCollectionTotalValue()
         {
-            double.TryParse(AmtEuroCoinsTotalValue, out double amtEuroCoinsTotalValue);
+            double.TryParse(AmtEuroCoinsTotalValue, out double euroCoinsTotalValue);
 
             AmtCollectionTotalValue = 
                 AmtCollectionCoinsTotalValue + 
                 AmtEuroBillsTotalValue +
-                amtEuroCoinsTotalValue
+                euroCoinsTotalValue
             ;
         }
         
@@ -862,9 +849,9 @@ namespace CollectionAdministration_WPF
 
         private void UpdateDayOfCountDate()
         {
-            string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo.GetDayName(dtCountDate.DayOfWeek).ToString();
+            string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo?.GetDayName(dtCountDate.DayOfWeek);
 
-            string capitalizedFirstCharDayOfCountDate = unformattedDayOfCountDate.Remove(0, 1).Insert(0, unformattedDayOfCountDate.Substring(0, 1).ToUpper());
+            string capitalizedFirstCharDayOfCountDate = unformattedDayOfCountDate?.Remove(0, 1).Insert(0, unformattedDayOfCountDate.Substring(0, 1).ToUpper());
 
             DayOfCountDate = capitalizedFirstCharDayOfCountDate;
         }
@@ -917,12 +904,12 @@ namespace CollectionAdministration_WPF
 
         private void ExecuteDeleteCountFlow()
         {
-            DatabaseQueries.DeleteCount(GetPKSelectedCount());
+            DatabaseQueries.DeleteCount(GetPkSelectedCount());
         }
         #endregion
 
         #region DataBase related methods
-        private int GetPKSelectedCount()
+        private int GetPkSelectedCount()
         {
             return CollectionCountId;
         }
@@ -932,9 +919,9 @@ namespace CollectionAdministration_WPF
             return DatabaseQueries.GetCollectionCounts();
         }
 
-        private void FillCollectionCountDataGrid(List<CollectionCount> collectionCounts)
+        private void FillCollectionCountDataGrid(List<CollectionCount> collectionCountResults)
         {
-            CollectionCounts = collectionCounts;
+            CollectionCounts = collectionCountResults;
         }
 
         private void FillCurrentCountFields(CollectionCount collectionCount)
@@ -966,19 +953,19 @@ namespace CollectionAdministration_WPF
                 { nameof(CollectionRound), $"\'{CollectionRound}\'"},
                 { nameof(Description), $"\'{Description}\'"},
                 // Colection coins
-                { nameof(AmtYellowCollectionCoin), AmtYellowCollectionCoin.ToString().Replace(",", ".")},
-                { nameof(AmtGreenCollectionCoin), AmtGreenCollectionCoin.ToString().Replace(",", ".")},
-                { nameof(AmtRedCollectionCoin), AmtRedCollectionCoin.ToString().Replace(",", ".")},
-                { nameof(AmtBlueCollectionCoin), AmtRedCollectionCoin.ToString().Replace(",", ".")},
+                { nameof(AmtYellowCollectionCoin), AmtYellowCollectionCoin.Replace(",", ".")},
+                { nameof(AmtGreenCollectionCoin), AmtGreenCollectionCoin.Replace(",", ".")},
+                { nameof(AmtRedCollectionCoin), AmtRedCollectionCoin.Replace(",", ".")},
+                { nameof(AmtBlueCollectionCoin), AmtRedCollectionCoin.Replace(",", ".")},
                 // Euro bills
-                { nameof(AmtFiveEuroBill), AmtFiveEuroBill.ToString().Replace(",", ".")},
-                { nameof(AmtTenEuroBill), AmtTenEuroBill.ToString().Replace(",", ".")},
-                { nameof(AmtTwentyEuroBill), AmtTwentyEuroBill.ToString().Replace(",", ".")},
-                { nameof(AmtFiftyEuroBill), AmtFiftyEuroBill.ToString().Replace(",", ".")},
-                { nameof(AmtHundredEuroBill), AmtHundredEuroBill.ToString().Replace(",", ".")},
-                { nameof(AmtTwoHundredEuroBill), AmtTwoHundredEuroBill.ToString().Replace(",", ".")},
+                { nameof(AmtFiveEuroBill), AmtFiveEuroBill.Replace(",", ".")},
+                { nameof(AmtTenEuroBill), AmtTenEuroBill.Replace(",", ".")},
+                { nameof(AmtTwentyEuroBill), AmtTwentyEuroBill.Replace(",", ".")},
+                { nameof(AmtFiftyEuroBill), AmtFiftyEuroBill.Replace(",", ".")},
+                { nameof(AmtHundredEuroBill), AmtHundredEuroBill.Replace(",", ".")},
+                { nameof(AmtTwoHundredEuroBill), AmtTwoHundredEuroBill.Replace(",", ".")},
                 // Euro coins
-                { nameof(AmtEuroCoinsTotalValue), AmtEuroCoinsTotalValue.ToString().Replace(",", ".")}
+                { nameof(AmtEuroCoinsTotalValue), AmtEuroCoinsTotalValue.Replace(",", ".")}
             };         
         }
         #endregion
