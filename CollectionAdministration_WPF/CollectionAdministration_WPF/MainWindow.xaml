@@ -359,13 +359,13 @@
 
         </StackPanel>
 
-        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties: Opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties huidige en opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
 
             <UniformGrid Columns="6">
 
-                <Button Content="Telling opslaan" Command="{Binding Path=SaveCount}" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Telling opslaan" Command="{Binding Path=SaveCount}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding AppState.IsSavingEnabled}"/>
 
-                <Button Content="Tellingen opvragen" Command="{Binding Path=GetCounts}" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Tellingen opvragen" Command="{Binding Path=GetCounts}" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding AppState.IsLoadingSavedCountEnabled}"/>
 
                 <StackPanel>
 
@@ -374,11 +374,11 @@
 
                 </StackPanel>
 
-                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}" Command="{Binding SetSelectedDataGridRowAsCurrentCount}"/>
+                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}" Command="{Binding LoadSelectedCountForViewing}" IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
 
-                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
 
-                <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}" IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
 
             </UniformGrid>
 

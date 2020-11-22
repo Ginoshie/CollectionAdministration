@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>CollectionAdministration_WPF</RootNamespace>
     <AssemblyName>CollectionAdministration_WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,6 +80,8 @@
     <Compile Include="Enums\CollectionRoundDescription.cs" />
     <Compile Include="Enums\EuroBill.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="States\AppStates\SavedCountSelected.cs" />
+    <Compile Include="States\AppStates\CurrentCountSelected.cs" />
     <Compile Include="Validation\NullOrPositiveIntegerAsStringValidationRule.cs" />
     <Compile Include="Validation\NullOrPositiveDoubleAsStringValidationRule.cs" />
     <Compile Include="ViewModel\CollectionAdministrationViewModel.cs" />
@@ -116,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{c51b1ce0-d5b0-4dc5-a8f8-3c777b5ca950}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

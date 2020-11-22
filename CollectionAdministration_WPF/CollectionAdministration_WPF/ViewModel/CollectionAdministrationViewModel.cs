@@ -9,6 +9,8 @@ using CollectionAdministration_WPF.Calculators;
 using CollectionAdministration_WPF.DTO;
 using CollectionAdministration_WPF.Enums;
 using CollectionAdministration_WPF.Extensions;
+using CollectionAdministration_WPF.States.AppStates;
+using Interfaces.States;
 
 namespace CollectionAdministration_WPF.ViewModel
 {
@@ -83,6 +85,8 @@ namespace CollectionAdministration_WPF.ViewModel
         private double amtCollectionTotalValue;
 
         private List<CollectionCount> collectionCounts;
+
+        private IAppStates appState;
         #endregion
 
         public CollectionAdministrationViewModel()
@@ -90,10 +94,12 @@ namespace CollectionAdministration_WPF.ViewModel
             DtCountDate = DateTime.Today;
 
             SetDefaultDescription();
+            
+            AppState = new CurrentCountSelected();
 
-            GetCounts = new CommandHandler(ExecuteCountsFlow);
+            GetCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
-            SetSelectedDataGridRowAsCurrentCount = new CommandHandler(ExecuteSetSelectedRowAsCurrentCount);
+            LoadSelectedCountForViewing = new CommandHandler(ExecuteSetSelectedRowAsCurrentCount);
 
             SaveCount = new CommandHandler(ExecuteSaveCountFlow);
 
@@ -737,6 +743,19 @@ namespace CollectionAdministration_WPF.ViewModel
                 return Visibility.Visible;
             }
         }
+
+        public IAppStates AppState
+        {
+            get => appState;
+
+            private set
+            {
+                appState = value;
+                
+                OnPropertyChanged();
+            }
+        }
+        
         #endregion
 
         private string FormatUserInputPositiveDouble(string value)
@@ -881,7 +900,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public ICommand GetCounts { get; set; }
 
-        public ICommand SetSelectedDataGridRowAsCurrentCount { get; set; }
+        public ICommand LoadSelectedCountForViewing { get; set; }
 
         public ICommand DeleteCount { get; set; }
         #endregion
@@ -892,7 +911,7 @@ namespace CollectionAdministration_WPF.ViewModel
             DatabaseQueries.InsertCountResult(GetCountResultAsDictionary());
         }
 
-        private void ExecuteCountsFlow()
+        private void ExecuteLoadCountsFlow()
         {
             FillCollectionCountDataGrid(RetrieveCollectionCounts());
         }

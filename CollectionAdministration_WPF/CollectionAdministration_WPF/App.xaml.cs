@@ -21,9 +21,7 @@ namespace CollectionAdministration_WPF
 
         private static void SelectivelyHandleMouseButton(object sender, MouseButtonEventArgs e)
         {
-            TextBox textbox = (sender as TextBox);
-
-            if (textbox == null || textbox.IsKeyboardFocusWithin)
+            if (!(sender is TextBox textBox) || textBox.IsKeyboardFocusWithin)
             {
                 return;
             }
@@ -32,7 +30,7 @@ namespace CollectionAdministration_WPF
             {
                 e.Handled = true;
 
-                textbox.Focus();
+                textBox.Focus();
             }
         }
 

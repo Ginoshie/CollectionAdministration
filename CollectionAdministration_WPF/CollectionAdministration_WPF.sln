@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionAdministration_WPF", "CollectionAdministration_WPF\CollectionAdministration_WPF.csproj", "{BAD6CAD3-937A-4577-9DC5-9A755F9FB92C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{0C7EFB34-BCFA-4B78-B697-81A4EC9BDFEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{BAD6CAD3-937A-4577-9DC5-9A755F9FB92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD6CAD3-937A-4577-9DC5-9A755F9FB92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD6CAD3-937A-4577-9DC5-9A755F9FB92C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C7EFB34-BCFA-4B78-B697-81A4EC9BDFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7EFB34-BCFA-4B78-B697-81A4EC9BDFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
