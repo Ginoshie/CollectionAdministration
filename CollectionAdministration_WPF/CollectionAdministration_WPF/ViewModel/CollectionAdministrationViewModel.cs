@@ -93,7 +93,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
             GetCounts = new CommandHandler(ExecuteCountsFlow);
 
-            SetSelectedDataGridRowAsCurrentCount = new CommandHandler(() => ExecuteSetSelectedRowAsCurrentCount());
+            SetSelectedDataGridRowAsCurrentCount = new CommandHandler(ExecuteSetSelectedRowAsCurrentCount);
 
             SaveCount = new CommandHandler(ExecuteSaveCountFlow);
 
