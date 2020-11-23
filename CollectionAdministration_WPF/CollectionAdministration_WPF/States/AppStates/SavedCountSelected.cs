@@ -11,9 +11,15 @@ namespace CollectionAdministration_WPF.States.AppStates
 
         public bool IsExistingCountSelected => true;
 
-        public IAppStates CreateNewCount(Action createNewCount) => this;
+        public IAppStates LoadSavedCounts(Action loadSavedCounts) => this;
 
         public IAppStates SaveCurrentCount(Action saveCurrentCount) => this;
+        public IAppStates DeleteCount(Action deleteSelectedCount)
+        {
+            deleteSelectedCount();
+            
+            return new CurrentCountSelected();
+        }
 
         public IAppStates ViewSelectedCount(Action viewSelectedCount)
         {
@@ -35,5 +41,7 @@ namespace CollectionAdministration_WPF.States.AppStates
 
             return this;
         }
+
+        public IAppStates SelectSavedCount() => this;
     }
 }

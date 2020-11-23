@@ -10,14 +10,18 @@ namespace Interfaces.States
         
         bool IsExistingCountSelected { get; }
 
-        IAppStates CreateNewCount(Action createNewCount);
+        IAppStates LoadSavedCounts(Action loadSavedCounts);
 
         IAppStates SaveCurrentCount(Action saveCurrentCount);
+
+        IAppStates DeleteCount(Action deleteSelectedCount);
 
         IAppStates ViewSelectedCount(Action viewSelectedCount);
 
         IAppStates EditSelectedCount(Action editSelectedCount);
 
         IAppStates RemoveSelectedCount(Action removeSelectedCount);
+
+        IAppStates SelectSavedCount();
     }
 }

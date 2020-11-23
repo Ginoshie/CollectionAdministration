@@ -97,13 +97,17 @@ namespace CollectionAdministration_WPF.ViewModel
             
             AppState = new CurrentCountSelected();
 
-            GetCounts = new CommandHandler(ExecuteLoadCountsFlow);
+            GetSavedCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
-            LoadSelectedCountForViewing = new CommandHandler(ExecuteSetSelectedRowAsCurrentCount);
+            EditSelectedCount = new CommandHandler(ExecuteEditCountFlow);
+            
+            ViewSelectedCount = new CommandHandler(ExecuteViewCountFlow);
 
-            SaveCount = new CommandHandler(ExecuteSaveCountFlow);
+            SaveCurrentCount = new CommandHandler(ExecuteSaveCountFlow);
 
-            DeleteCount = new CommandHandler(ExecuteDeleteCountFlow);
+            DeleteSelectedCount = new CommandHandler(ExecuteDeleteCountFlow);
+            
+            SelectSavedCount = new CommandHandler(ExecuteSelectSavedCountFlow);
         }
 
         #region Properties
@@ -896,34 +900,48 @@ namespace CollectionAdministration_WPF.ViewModel
         #endregion
 
         #region Commands
-        public ICommand SaveCount { get; set; }
+        public ICommand SaveCurrentCount { get; set; }
 
-        public ICommand GetCounts { get; set; }
+        public ICommand GetSavedCounts { get; set; }
 
-        public ICommand LoadSelectedCountForViewing { get; set; }
+        public ICommand EditSelectedCount { get; set; }
+        
+        public ICommand ViewSelectedCount { get; set; }
 
-        public ICommand DeleteCount { get; set; }
+        public ICommand DeleteSelectedCount { get; set; }
+        
+        public ICommand SelectSavedCount { get; set; }
         #endregion
 
         #region Flows
         private void ExecuteSaveCountFlow()
         {
-            DatabaseQueries.InsertCountResult(GetCountResultAsDictionary());
+            AppState = AppState.SaveCurrentCount(() => DatabaseQueries.InsertCountResult(GetCountResultAsDictionary()));
         }
 
         private void ExecuteLoadCountsFlow()
         {
-            FillCollectionCountDataGrid(RetrieveCollectionCounts());
+            AppState = AppState.LoadSavedCounts(() => FillCollectionCountDataGrid(RetrieveCollectionCounts()));
         }
 
-        private void ExecuteSetSelectedRowAsCurrentCount()
+        private void ExecuteEditCountFlow()
         {
-            FillCurrentCountFields(CountSelectedInDataGrid);
+            AppState = AppState.EditSelectedCount(() => FillCurrentCountFields(CountSelectedInDataGrid));
+        }
+        
+        private void ExecuteViewCountFlow()
+        {
+            AppState = AppState.ViewSelectedCount(() => FillCurrentCountFields(CountSelectedInDataGrid));
         }
 
         private void ExecuteDeleteCountFlow()
         {
-            DatabaseQueries.DeleteCount(GetPkSelectedCount());
+            AppState = AppState.DeleteCount(() => DatabaseQueries.DeleteCount(GetPkSelectedCount()));
+        }
+
+        private void ExecuteSelectSavedCountFlow()
+        {
+            AppState = AppState.SelectSavedCount();
         }
         #endregion
 
