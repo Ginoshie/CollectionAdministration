@@ -7,7 +7,7 @@ namespace CollectionAdministration_WPF.States.AppStates
     {
         public bool IsSavingEnabled => true;
         
-        public bool IsLoadingSavedCountEnabled => false;
+        public bool IsLoadingSavedCountEnabled => true;
         
         public bool IsExistingCountSelected => false;
         
