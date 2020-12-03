@@ -378,7 +378,7 @@
 
             <UniformGrid Columns="6">
 
-                <Button Content="Telling opslaan" Command="{Binding Path=SaveCurrentCount}" Style="{StaticResource ButtonStyle}" 
+                <Button Content="{Binding AppState.SaveButtonText}" Command="{Binding Path=SaveCount}" Style="{StaticResource ButtonStyle}" 
                         IsEnabled="{Binding AppState.IsSavingEnabled}"/>
 
                 <Button Content="Tellingen opvragen" Command="{Binding Path=GetSavedCounts}" Style="{StaticResource ButtonStyle}" 
@@ -391,14 +391,14 @@
 
                 </StackPanel>
 
-                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}" Command="{Binding EditSelectedCount}" 
-                        IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
+                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}" Command="{Binding ViewSelectedCount}" 
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
 
-                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}" Command="{Binding }"
-                        IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
+                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}" Command="{Binding EditSelectedCount}"
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
 
                 <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteSelectedCount}"
-                        IsEnabled="{Binding AppState.IsExistingCountSelected}"/>
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
 
             </UniformGrid>
 

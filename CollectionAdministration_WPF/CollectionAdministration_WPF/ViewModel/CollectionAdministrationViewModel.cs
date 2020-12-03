@@ -19,74 +19,79 @@ namespace CollectionAdministration_WPF.ViewModel
         #region Fields
 
         #region Metadata
-        private int collectionCountId;
 
-        private DateTime dtCountDate;
+        private int _collectionCountId;
+        
+        private DateTime _dtCountDate;
 
-        private string dayOfCountDate;
+        private string _dayOfCountDate;
 
-        private ChurchCommunity churchCommunity;
+        private ChurchCommunity _churchCommunity;
 
-        private CollectionRound collectionRound;
+        private CollectionRound _collectionRound;
 
-        private string description;
+        private string _description;
         #endregion
 
         #region Collection Coin
-        private string amtYellowCollectionCoin;
+        private string _amtYellowCollectionCoin;
 
-        private double amtYellowCollectionCoinTotalValue;
+        private double _amtYellowCollectionCoinTotalValue;
 
-        private string amtGreenCollectionCoin;
+        private string _amtGreenCollectionCoin;
 
-        private double amtGreenCollectionCoinTotalValue;
+        private double _amtGreenCollectionCoinTotalValue;
 
-        private string amtRedCollectionCoin;
+        private string _amtRedCollectionCoin;
 
-        private double amtRedCollectionCoinTotalValue;
+        private double _amtRedCollectionCoinTotalValue;
 
-        private string amtBlueCollectionCoin;
+        private string _amtBlueCollectionCoin;
 
-        private double amtBlueCollectionCoinTotalValue;
+        private double _amtBlueCollectionCoinTotalValue;
 
-        private double amtCollectionCoinsTotalValue;
+        private double _amtCollectionCoinsTotalValue;
         #endregion
 
         #region Euro Bill
-        private string amtFiveEuroBill;
+        private string _amtFiveEuroBill;
 
-        private double amtFiveEuroBillTotalValue;
+        private double _amtFiveEuroBillTotalValue;
 
-        private string amtTenEuroBill;
+        private string _amtTenEuroBill;
 
-        private double amtTenEuroBillTotalValue;
+        private double _amtTenEuroBillTotalValue;
 
-        private string amtTwentyEuroBill;
+        private string _amtTwentyEuroBill;
 
-        private double amtTwentyEuroBillTotalValue;
+        private double _amtTwentyEuroBillTotalValue;
 
-        private string amtFiftyEuroBill;
+        private string _amtFiftyEuroBill;
 
-        private double amtFiftyEuroBillTotalValue;
+        private double _amtFiftyEuroBillTotalValue;
 
-        private string amtHundredEuroBill;
+        private string _amtHundredEuroBill;
 
-        private double amtHundredEuroBillTotalValue;
+        private double _amtHundredEuroBillTotalValue;
 
-        private string amtTwoHundredEuroBill;
+        private string _amtTwoHundredEuroBill;
 
-        private double amtTwoHundredEuroBillTotalValue;
+        private double _amtTwoHundredEuroBillTotalValue;
 
-        private double amtEuroBillsTotalValue;
+        private double _amtEuroBillsTotalValue;
+
         #endregion
 
-        private string amtEuroCoinsTotalValue;
+        private string _amtEuroCoinsTotalValue;
 
-        private double amtCollectionTotalValue;
+        private double _amtCollectionTotalValue;
 
-        private List<CollectionCount> collectionCounts;
+        private List<CollectionCount> _collectionCounts;
 
-        private IAppStates appState;
+        private IAppStates _appState;
+        
+        private ICommand _saveCount;
+
         #endregion
 
         public CollectionAdministrationViewModel()
@@ -95,7 +100,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
             SetDefaultDescription();
             
-            AppState = new CurrentCountSelected();
+            AppState = new CreatingNewCount();
 
             GetSavedCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
@@ -103,7 +108,7 @@ namespace CollectionAdministration_WPF.ViewModel
             
             ViewSelectedCount = new CommandHandler(ExecuteViewCountFlow);
 
-            SaveCurrentCount = new CommandHandler(ExecuteSaveCountFlow);
+            SaveCount = new CommandHandler(ExecuteSaveCountFlow);
 
             DeleteSelectedCount = new CommandHandler(ExecuteDeleteCountFlow);
             
@@ -113,48 +118,38 @@ namespace CollectionAdministration_WPF.ViewModel
         #region Properties
 
         #region Metadata
-        public int CollectionCountId
-        {
-            get => collectionCountId;
-            set
-            {
-                if (collectionCountId == value)
-                {
-                    return;
-                }
-
-                collectionCountId = value;
-            }
-        }
-
+        public int CollectionCountId { get; set; }
+        
         public DateTime DtCountDate
         {
-            get => dtCountDate;
+            get => _dtCountDate;
             set
             {
-                if (dtCountDate == value)
+                if (_dtCountDate == value)
                 {
                     return;
                 }
 
-                dtCountDate = value;
+                _dtCountDate = value;
 
                 UpdateDayOfCountDate();
+                
+                OnPropertyChanged();
             }
         }
 
         public string DayOfCountDate
         {
-            get => dayOfCountDate;
+            get => _dayOfCountDate;
 
             private set
             {
-                if (dayOfCountDate == value)
+                if (_dayOfCountDate == value)
                 {
                     return;
                 }
 
-                dayOfCountDate = value;
+                _dayOfCountDate = value;
 
                 OnPropertyChanged();
             }
@@ -162,39 +157,46 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public ChurchCommunity ChurchCommunity
         {
-            get => churchCommunity;
-            set => churchCommunity = value;
+            get => _churchCommunity;
+            set
+            {
+                _churchCommunity = value;
+
+                OnPropertyChanged();
+            }
         }
 
         public CollectionRound CollectionRound
         {
-            get => collectionRound;
+            get => _collectionRound;
 
             set
             {
-                if (collectionRound == value)
+                if (_collectionRound == value)
                 {
                     return;
                 }
 
-                collectionRound = value;
+                _collectionRound = value;
 
                 SetDefaultDescription();
+                
+                OnPropertyChanged();
             }
         }
 
         public string Description
         {
-            get => description;
+            get => _description;
 
             set
             {
-                if (description == value)
+                if (_description == value)
                 {
                     return;
                 }
 
-                description = value;
+                _description = value;
 
                 OnPropertyChanged();
             }
@@ -204,23 +206,23 @@ namespace CollectionAdministration_WPF.ViewModel
         #region Collection Coin
         public string AmtYellowCollectionCoin
         {
-            get => amtYellowCollectionCoin ?? "0";
+            get => _amtYellowCollectionCoin ?? "0";
 
             set
             {
                 string trimmedValue = value?.Trim();
 
-                if (amtYellowCollectionCoin == trimmedValue)
+                if (_amtYellowCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtYellowCollectionCoin = "0";
+                    _amtYellowCollectionCoin = "0";
                 }
 
-                amtYellowCollectionCoin = trimmedValue;
+                _amtYellowCollectionCoin = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -230,16 +232,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtYellowCollectionCoinTotalValue
         {
-            get => amtYellowCollectionCoinTotalValue;
+            get => _amtYellowCollectionCoinTotalValue;
 
             private set
             {
-                if (amtYellowCollectionCoinTotalValue == value)
+                if (_amtYellowCollectionCoinTotalValue == value)
                 {
                     return;
                 }
 
-                amtYellowCollectionCoinTotalValue = value;
+                _amtYellowCollectionCoinTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -247,23 +249,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtGreenCollectionCoin
         {
-            get => amtGreenCollectionCoin ?? "0";
+            get => _amtGreenCollectionCoin ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtGreenCollectionCoin == trimmedValue)
+                if (_amtGreenCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtGreenCollectionCoin = "0";
+                    _amtGreenCollectionCoin = "0";
                 }
 
-                amtGreenCollectionCoin = trimmedValue;
+                _amtGreenCollectionCoin = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -273,16 +275,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtGreenCollectionCoinTotalValue
         {
-            get => amtGreenCollectionCoinTotalValue;
+            get => _amtGreenCollectionCoinTotalValue;
 
             private set
             {
-                if (amtGreenCollectionCoinTotalValue == value)
+                if (_amtGreenCollectionCoinTotalValue == value)
                 {
                     return;
                 }
 
-                amtGreenCollectionCoinTotalValue = value;
+                _amtGreenCollectionCoinTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -290,23 +292,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtRedCollectionCoin
         {
-            get => amtRedCollectionCoin ?? "0";
+            get => _amtRedCollectionCoin ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtRedCollectionCoin == trimmedValue)
+                if (_amtRedCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtRedCollectionCoin = "0";
+                    _amtRedCollectionCoin = "0";
                 }
 
-                amtRedCollectionCoin = trimmedValue;
+                _amtRedCollectionCoin = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -316,16 +318,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtRedCollectionCoinTotalValue
         {
-            get => amtRedCollectionCoinTotalValue;
+            get => _amtRedCollectionCoinTotalValue;
 
             private set
             {
-                if (amtRedCollectionCoinTotalValue == value)
+                if (_amtRedCollectionCoinTotalValue == value)
                 {
                     return;
                 }
 
-                amtRedCollectionCoinTotalValue = value;
+                _amtRedCollectionCoinTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -333,23 +335,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtBlueCollectionCoin
         {
-            get => amtBlueCollectionCoin ?? "0";
+            get => _amtBlueCollectionCoin ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtBlueCollectionCoin == trimmedValue)
+                if (_amtBlueCollectionCoin == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtBlueCollectionCoin = "0";
+                    _amtBlueCollectionCoin = "0";
                 }
 
-                amtBlueCollectionCoin = trimmedValue;
+                _amtBlueCollectionCoin = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -359,16 +361,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtBlueCollectionCoinTotalValue
         {
-            get => amtBlueCollectionCoinTotalValue;
+            get => _amtBlueCollectionCoinTotalValue;
 
             private set
             {
-                if (amtBlueCollectionCoinTotalValue == value)
+                if (_amtBlueCollectionCoinTotalValue == value)
                 {
                     return;
                 }
 
-                amtBlueCollectionCoinTotalValue = value;
+                _amtBlueCollectionCoinTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -376,16 +378,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtCollectionCoinsTotalValue
         {
-            get => amtCollectionCoinsTotalValue;
+            get => _amtCollectionCoinsTotalValue;
 
             set
             {
-                if (amtCollectionCoinsTotalValue == value)
+                if (_amtCollectionCoinsTotalValue == value)
                 {
                     return;
                 }
 
-                amtCollectionCoinsTotalValue = value;
+                _amtCollectionCoinsTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -395,23 +397,23 @@ namespace CollectionAdministration_WPF.ViewModel
         #region Euro Bill
         public string AmtFiveEuroBill
         {
-            get => amtFiveEuroBill ?? "0";
+            get => _amtFiveEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtFiveEuroBill == trimmedValue)
+                if (_amtFiveEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtFiveEuroBill = "0";
+                    _amtFiveEuroBill = "0";
                 }
 
-                amtFiveEuroBill = trimmedValue;
+                _amtFiveEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -421,16 +423,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtFiveEuroBillTotalValue
         {
-            get => amtFiveEuroBillTotalValue;
+            get => _amtFiveEuroBillTotalValue;
 
             private set
             {
-                if (amtFiveEuroBillTotalValue == value)
+                if (_amtFiveEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtFiveEuroBillTotalValue = value;
+                _amtFiveEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -438,23 +440,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtTenEuroBill
         {
-            get => amtTenEuroBill ?? "0";
+            get => _amtTenEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtTenEuroBill == trimmedValue)
+                if (_amtTenEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtTenEuroBill = "0";
+                    _amtTenEuroBill = "0";
                 }
 
-                amtTenEuroBill = trimmedValue;
+                _amtTenEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -464,16 +466,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtTenEuroBillTotalValue
         {
-            get => amtTenEuroBillTotalValue;
+            get => _amtTenEuroBillTotalValue;
 
             private set
             {
-                if (amtTenEuroBillTotalValue == value)
+                if (_amtTenEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtTenEuroBillTotalValue = value;
+                _amtTenEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -481,23 +483,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtTwentyEuroBill
         {
-            get => amtTwentyEuroBill ?? "0";
+            get => _amtTwentyEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtTwentyEuroBill == trimmedValue)
+                if (_amtTwentyEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtTwentyEuroBill = "0";
+                    _amtTwentyEuroBill = "0";
                 }
 
-                amtTwentyEuroBill = trimmedValue;
+                _amtTwentyEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -507,16 +509,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtTwentyEuroBillTotalValue
         {
-            get => amtTwentyEuroBillTotalValue;
+            get => _amtTwentyEuroBillTotalValue;
 
             private set
             {
-                if (amtTwentyEuroBillTotalValue == value)
+                if (_amtTwentyEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtTwentyEuroBillTotalValue = value;
+                _amtTwentyEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -524,23 +526,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtFiftyEuroBill
         {
-            get => amtFiftyEuroBill ?? "0";
+            get => _amtFiftyEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtFiftyEuroBill == trimmedValue)
+                if (_amtFiftyEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtFiftyEuroBill = "0";
+                    _amtFiftyEuroBill = "0";
                 }
 
-                amtFiftyEuroBill = trimmedValue;
+                _amtFiftyEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -550,16 +552,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtFiftyEuroBillTotalValue
         {
-            get => amtFiftyEuroBillTotalValue;
+            get => _amtFiftyEuroBillTotalValue;
 
             private set
             {
-                if (amtFiftyEuroBillTotalValue == value)
+                if (_amtFiftyEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtFiftyEuroBillTotalValue = value;
+                _amtFiftyEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -567,23 +569,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtHundredEuroBill
         {
-            get => amtHundredEuroBill ?? "0";
+            get => _amtHundredEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtHundredEuroBill == trimmedValue)
+                if (_amtHundredEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtHundredEuroBill = "0";
+                    _amtHundredEuroBill = "0";
                 }
 
-                amtHundredEuroBill = trimmedValue;
+                _amtHundredEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -593,16 +595,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtHundredEuroBillTotalValue
         {
-            get => amtHundredEuroBillTotalValue;
+            get => _amtHundredEuroBillTotalValue;
 
             set
             {
-                if (amtHundredEuroBillTotalValue == value)
+                if (_amtHundredEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtHundredEuroBillTotalValue = value;
+                _amtHundredEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -610,23 +612,23 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtTwoHundredEuroBill
         {
-            get => amtTwoHundredEuroBill ?? "0";
+            get => _amtTwoHundredEuroBill ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtTwoHundredEuroBill == trimmedValue)
+                if (_amtTwoHundredEuroBill == trimmedValue)
                 {
                     return;
                 }
 
                 if (string.IsNullOrEmpty(trimmedValue))
                 {
-                    amtTwoHundredEuroBill = "0";
+                    _amtTwoHundredEuroBill = "0";
                 }
 
-                amtTwoHundredEuroBill = trimmedValue;
+                _amtTwoHundredEuroBill = trimmedValue;
 
                 OnPropertyChanged();
 
@@ -636,16 +638,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtTwoHundredEuroBillTotalValue
         {
-            get => amtTwoHundredEuroBillTotalValue;
+            get => _amtTwoHundredEuroBillTotalValue;
 
             private set
             {
-                if (amtTwoHundredEuroBillTotalValue == value)
+                if (_amtTwoHundredEuroBillTotalValue == value)
                 {
                     return;
                 }
 
-                amtTwoHundredEuroBillTotalValue = value;
+                _amtTwoHundredEuroBillTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -653,15 +655,15 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtEuroBillsTotalValue
         {
-            get => amtEuroBillsTotalValue;
+            get => _amtEuroBillsTotalValue;
             set
             {
-                if (amtEuroBillsTotalValue == value)
+                if (_amtEuroBillsTotalValue == value)
                 {
                     return;
                 }
 
-                amtEuroBillsTotalValue = value;
+                _amtEuroBillsTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -670,25 +672,18 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public string AmtEuroCoinsTotalValue
         {
-            get => amtEuroCoinsTotalValue ?? "0";
+            get => _amtEuroCoinsTotalValue ?? "0";
 
             set
             {
                 string trimmedValue = value.Trim();
 
-                if (amtEuroCoinsTotalValue == trimmedValue)
+                if (_amtEuroCoinsTotalValue == trimmedValue)
                 {
                     return;
                 }
 
-                if (string.IsNullOrEmpty(trimmedValue))
-                {
-                    amtEuroCoinsTotalValue = "0";
-                }
-                else
-                {
-                    amtEuroCoinsTotalValue = FormatUserInputPositiveDouble(value);
-                }
+                _amtEuroCoinsTotalValue = string.IsNullOrEmpty(trimmedValue) ? "0" : FormatUserInputPositiveDouble(value);
 
                 OnPropertyChanged();
 
@@ -698,16 +693,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public double AmtCollectionTotalValue
         {
-            get => amtCollectionTotalValue;
+            get => _amtCollectionTotalValue;
 
             set
             {
-                if (amtCollectionTotalValue == value)
+                if (_amtCollectionTotalValue == value)
                 {
                     return;
                 }
 
-                amtCollectionTotalValue = value;
+                _amtCollectionTotalValue = value;
 
                 OnPropertyChanged();
             }
@@ -717,16 +712,16 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public List<CollectionCount> CollectionCounts
         {
-            get => collectionCounts;
+            get => _collectionCounts;
 
             set
             {
-                if(collectionCounts == value)
+                if(_collectionCounts == value)
                 {
                     return;
                 }
 
-                collectionCounts = value;
+                _collectionCounts = value;
 
                 OnPropertyChanged();
 
@@ -750,11 +745,11 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public IAppStates AppState
         {
-            get => appState;
+            get => _appState;
 
             private set
             {
-                appState = value;
+                _appState = value;
                 
                 OnPropertyChanged();
             }
@@ -872,7 +867,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
         private void UpdateDayOfCountDate()
         {
-            string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo?.GetDayName(dtCountDate.DayOfWeek);
+            string unformattedDayOfCountDate = DateTimeFormatInfo.CurrentInfo?.GetDayName(_dtCountDate.DayOfWeek);
 
             string capitalizedFirstCharDayOfCountDate = unformattedDayOfCountDate?.Remove(0, 1).Insert(0, unformattedDayOfCountDate.Substring(0, 1).ToUpper());
 
@@ -900,7 +895,20 @@ namespace CollectionAdministration_WPF.ViewModel
         #endregion
 
         #region Commands
-        public ICommand SaveCurrentCount { get; set; }
+
+        public ICommand SaveCount
+        {
+            get => _saveCount;
+            set
+            {
+                if (_saveCount != null && value == _saveCount)
+                    return;
+                
+                _saveCount = value;
+                
+                OnPropertyChanged();
+            } 
+        }
 
         public ICommand GetSavedCounts { get; set; }
 
@@ -916,7 +924,16 @@ namespace CollectionAdministration_WPF.ViewModel
         #region Flows
         private void ExecuteSaveCountFlow()
         {
-            AppState = AppState.SaveCurrentCount(() => DatabaseQueries.InsertCountResult(GetCountResultAsDictionary()));
+            AppState = AppState.SaveCount(() => DatabaseQueries.InsertCountResult(GetCountResultAsDictionary()));
+            
+            ExecuteLoadCountsFlow();
+        }
+
+        private void ExecuteUpdateCountFlow()
+        {
+            AppState = AppState.SaveCount(() => DatabaseQueries.UpdateCount(CountSelectedInDataGrid.CollectionCountId, GetCountResultAsDictionary()));
+            
+            ExecuteLoadCountsFlow();
         }
 
         private void ExecuteLoadCountsFlow()
@@ -927,6 +944,8 @@ namespace CollectionAdministration_WPF.ViewModel
         private void ExecuteEditCountFlow()
         {
             AppState = AppState.EditSelectedCount(() => FillCurrentCountFields(CountSelectedInDataGrid));
+            
+            SaveCount = new CommandHandler(ExecuteUpdateCountFlow);
         }
         
         private void ExecuteViewCountFlow()
@@ -936,7 +955,12 @@ namespace CollectionAdministration_WPF.ViewModel
 
         private void ExecuteDeleteCountFlow()
         {
-            AppState = AppState.DeleteCount(() => DatabaseQueries.DeleteCount(GetPkSelectedCount()));
+            AppState = AppState.DeleteSelectedCount(() =>
+            {
+                DatabaseQueries.DeleteCount(CountSelectedInDataGrid.CollectionCountId);
+
+                ExecuteLoadCountsFlow();
+            });
         }
 
         private void ExecuteSelectSavedCountFlow()
@@ -946,11 +970,6 @@ namespace CollectionAdministration_WPF.ViewModel
         #endregion
 
         #region DataBase related methods
-        private int GetPkSelectedCount()
-        {
-            return CollectionCountId;
-        }
-
         private List<CollectionCount> RetrieveCollectionCounts()
         {
             return DatabaseQueries.GetCollectionCounts();
@@ -964,8 +983,8 @@ namespace CollectionAdministration_WPF.ViewModel
         private void FillCurrentCountFields(CollectionCount collectionCount)
         {
             DtCountDate = collectionCount.DtCountDate;
-            ChurchCommunity = collectionCount.ChurchCommunity; //(ChurchCommunity)Enum.Parse(typeof(ChurchCommunity), collectionCount.ChurchCommunity);
-            CollectionRound = collectionCount.CollectionRound; //(CollectionRound)Enum.Parse(typeof(CollectionRound), collectionCount.CollectionRound);
+            ChurchCommunity = collectionCount.ChurchCommunity;
+            CollectionRound = collectionCount.CollectionRound;
             Description = collectionCount.Description;
             AmtYellowCollectionCoin = collectionCount.AmtYellowCollectionCoin;
             AmtGreenCollectionCoin = collectionCount.AmtGreenCollectionCoin;

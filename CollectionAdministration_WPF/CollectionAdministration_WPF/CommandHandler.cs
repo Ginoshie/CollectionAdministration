@@ -5,11 +5,11 @@ namespace CollectionAdministration_WPF
 {
     public class CommandHandler : ICommand
     {
-        private readonly Action Action;
+        private readonly Action _action;
 
         public CommandHandler(Action action)
         {
-            Action = action;
+            _action = action;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -21,7 +21,7 @@ namespace CollectionAdministration_WPF
 
         public void Execute(object parameter)
         {
-            Action();
+            _action();
         }
     }
 }

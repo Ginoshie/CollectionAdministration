@@ -80,8 +80,10 @@
     <Compile Include="Enums\CollectionRoundDescription.cs" />
     <Compile Include="Enums\EuroBill.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="States\AppStates\SavedCountSelected.cs" />
-    <Compile Include="States\AppStates\CurrentCountSelected.cs" />
+    <Compile Include="States\AppStates\AbstractAppState.cs" />
+    <Compile Include="States\AppStates\EditingSavedCount.cs" />
+    <Compile Include="States\AppStates\SelectingSavedCount.cs" />
+    <Compile Include="States\AppStates\CreatingNewCount.cs" />
     <Compile Include="Validation\NullOrPositiveIntegerAsStringValidationRule.cs" />
     <Compile Include="Validation\NullOrPositiveDoubleAsStringValidationRule.cs" />
     <Compile Include="ViewModel\CollectionAdministrationViewModel.cs" />

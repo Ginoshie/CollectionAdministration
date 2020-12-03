@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using System.Linq;
 using CollectionAdministration_WPF.DTO;
 using CollectionAdministration_WPF.Enums;
 
@@ -22,83 +23,88 @@ namespace CollectionAdministration_WPF
                 throw new IndexOutOfRangeException();
             }
 
-            string fields = "";
+            var fields = string.Join(", ", countResult.Keys);
 
-            string formattedValues = "";
+            var formattedValues = string.Join(", ", countResult.Values);
 
-            fields = string.Join(", ", countResult.Keys);
+            var insertCountQuery = $"insert into CollectionCount ({fields}) values ({formattedValues});";
 
-            formattedValues = string.Join(", ", countResult.Values);
+            using var connection = new OleDbConnection(ConnectionString);
+            
+            OleDbCommand cmd = new OleDbCommand(insertCountQuery, connection);
 
-            string insertString = $"insert into CollectionCount ({fields}) values ({formattedValues});";
+            connection.Open();
 
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
-            {
-                OleDbCommand cmd = new OleDbCommand(insertString, connection);
+            cmd.ExecuteNonQuery();
 
-                connection.Open();
-
-                cmd.ExecuteNonQuery();
-
-                connection.Close();
-            }
+            connection.Close();
         }
 
         public static void DeleteCount(int pkCountResult)
         {
-            string deleteString = $"delete from CollectionCount where id={pkCountResult};";
+            string deleteCountQuery = $"delete from CollectionCount where collectionCountId={pkCountResult};";
 
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
-            {
-                OleDbCommand command = new OleDbCommand(deleteString, connection);
+            using var connection = new OleDbConnection(ConnectionString);
+            
+            var command = new OleDbCommand(deleteCountQuery, connection);
 
-                connection.Open();
+            connection.Open();
 
-                command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
 
-                connection.Close();
-            }
+            connection.Close();
         }
 
-        public static CollectionCount GetCollectionCount(int collectionCountId)
+        public static void UpdateCount(int pkCount, Dictionary<string, string> countResult)
         {
-            string selectCountString = $"select * from TellingCollecte where CollectionCountId = {collectionCountId};";
-
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            if(countResult.Count != 15)
             {
-                OleDbCommand command = new OleDbCommand(selectCountString);
+                throw new IndexOutOfRangeException();
+            }
 
-                connection.Open();
+            var fieldValuePairs = new List<string>();
+            
+            foreach (var kvp in countResult)
+            {
+                fieldValuePairs.Add(kvp.Key + " = " + kvp.Value);
+            }
 
-                OleDbDataReader reader = command.ExecuteReader();
+            var setClause = string.Join(", ", fieldValuePairs);
+            
+            var updateCountQuery = $"update CollectionCount set {setClause} where CollectionCountId = {pkCount};";
 
-                reader.Read();
+            using var connection = new OleDbConnection(ConnectionString);
+            
+            var cmd = new OleDbCommand(updateCountQuery, connection);
 
-                return GetCountCollectionFromDataReaderFields(reader);
-            };
+            connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
         }
 
         public static List<CollectionCount> GetCollectionCounts()
         {
-            List<CollectionCount> collectionCountsList = new List<CollectionCount>();
+            var collectionCountsList = new List<CollectionCount>();
 
-            string selectAllString = $"select * from CollectionCount;";
+            var selectAllCountsQuery = $"select * from CollectionCount;";
 
-            using (OleDbConnection connection = new OleDbConnection(ConnectionString))
+            using var connection = new OleDbConnection(ConnectionString);
+            
+            var command = new OleDbCommand(selectAllCountsQuery, connection);
+
+            connection.Open();
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
             {
-                OleDbCommand command = new OleDbCommand(selectAllString, connection);
+                collectionCountsList.Add(GetCountCollectionFromDataReaderFields(reader));
+            }
 
-                connection.Open();
-
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    collectionCountsList.Add(GetCountCollectionFromDataReaderFields(reader));
-                }
-
-                return collectionCountsList;
-            };
+            return collectionCountsList;
+            ;
         }
 
         private static CollectionCount GetCountCollectionFromDataReaderFields(OleDbDataReader reader)
