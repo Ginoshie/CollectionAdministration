@@ -18,6 +18,6 @@ namespace CollectionAdministration_WPF.States.AppStates
             return this;
         }
         
-        protected override IAppStates OnSelectSavedCount() => new SelectingSavedCount();
+        protected override IAppStates OnSelectSavedCount() => new SavedCountSelected();
     }
 }

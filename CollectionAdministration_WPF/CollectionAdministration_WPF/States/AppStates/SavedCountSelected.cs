@@ -3,7 +3,7 @@ using Interfaces.States;
 
 namespace CollectionAdministration_WPF.States.AppStates
 {
-    public class SelectingSavedCount : AbstractAppState
+    public class SavedCountSelected : AbstractAppState
     {
         public override string SaveButtonText => "Telling opslaan";
         
