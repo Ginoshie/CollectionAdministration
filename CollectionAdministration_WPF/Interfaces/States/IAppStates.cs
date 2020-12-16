@@ -11,6 +11,8 @@ namespace Interfaces.States
         
         bool IsLoadingSavedCountEnabled { get; }
         
+        bool IsCancelEditingSavedCountEnabled { get; }
+        
         bool IsSavedCountSelected { get; }
 
         IAppStates LoadSavedCounts(Action loadSavedCounts);

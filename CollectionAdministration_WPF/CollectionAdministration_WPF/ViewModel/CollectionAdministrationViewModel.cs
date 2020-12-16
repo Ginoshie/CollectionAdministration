@@ -105,6 +105,8 @@ namespace CollectionAdministration_WPF.ViewModel
             GetSavedCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
             EditSelectedCount = new CommandHandler(ExecuteEditCountFlow);
+
+            CancelEditingSavedCount = new CommandHandler(ExecuteCancelEditingSavedCount);
             
             ViewSelectedCount = new CommandHandler(ExecuteViewCountFlow);
 
@@ -914,6 +916,8 @@ namespace CollectionAdministration_WPF.ViewModel
 
         public ICommand EditSelectedCount { get; set; }
         
+        public ICommand CancelEditingSavedCount { get; set; }
+        
         public ICommand ViewSelectedCount { get; set; }
 
         public ICommand DeleteSelectedCount { get; set; }
@@ -947,6 +951,13 @@ namespace CollectionAdministration_WPF.ViewModel
             
             SaveCount = new CommandHandler(ExecuteUpdateCountFlow);
         }
+
+        private void ExecuteCancelEditingSavedCount()
+        {
+            AppState = AppState.CancelEditingSavedCount(ResetToNewCount);
+
+            SaveCount = new CommandHandler(ExecuteSaveCountFlow);
+        }
         
         private void ExecuteViewCountFlow()
         {
@@ -978,6 +989,25 @@ namespace CollectionAdministration_WPF.ViewModel
         private void FillCollectionCountDataGrid(List<CollectionCount> collectionCountResults)
         {
             CollectionCounts = collectionCountResults;
+        }
+
+        private void ResetToNewCount()
+        {
+            DtCountDate = DateTime.Today;
+            ChurchCommunity = ChurchCommunity.Wijk1;
+            CollectionRound = CollectionRound.First;
+            Description = "0";
+            AmtYellowCollectionCoin = "0";
+            AmtGreenCollectionCoin = "0";
+            AmtRedCollectionCoin = "0";
+            AmtBlueCollectionCoin = "0";
+            AmtFiveEuroBill = "0";
+            AmtTenEuroBill = "0";
+            AmtTwentyEuroBill = "0";
+            AmtFiftyEuroBill = "0";
+            AmtHundredEuroBill = "0";
+            AmtTwoHundredEuroBill = "0";
+            AmtEuroCoinsTotalValue = "0";
         }
 
         private void FillCurrentCountFields(CollectionCount collectionCount)

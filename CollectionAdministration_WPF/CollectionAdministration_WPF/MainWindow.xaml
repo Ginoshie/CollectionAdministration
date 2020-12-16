@@ -11,7 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModel:CollectionAdministrationViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="650" Width="725" MinHeight="650" MinWidth="255" ResizeMode="CanResize">
+        Title="MainWindow" Height="670" Width="845" MinHeight="670" MinWidth="845" ResizeMode="CanResize">
 
     <Window.Resources>
         <converter:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
@@ -90,12 +90,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="0" Width="235" HorizontalAlignment="Left" Grid.RowSpan="2">
 
-            <GroupBox Height="140" Header="Algemeen" Style="{StaticResource GroupBoxStyle}">
+            <GroupBox Height="155" Header="Algemeen" Style="{StaticResource GroupBoxStyle}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -376,7 +376,7 @@
 
         <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties huidige en opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
 
-            <UniformGrid Columns="6">
+            <UniformGrid Columns="7">
 
                 <Button Content="{Binding AppState.SaveButtonText}" Command="{Binding Path=SaveCount}" Style="{StaticResource ButtonStyle}" 
                         IsEnabled="{Binding AppState.IsSavingEnabled}"/>
@@ -396,6 +396,11 @@
 
                 <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}" Command="{Binding EditSelectedCount}"
                         IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
+                
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelEditingSavedCount}"
+                        IsEnabled="{Binding AppState.IsCancelEditingSavedCountEnabled}">
+                    <TextBlock Text="Aanpassen annuleren" TextWrapping="Wrap"/>
+                </Button>
 
                 <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteSelectedCount}"
                         IsEnabled="{Binding AppState.IsSavedCountSelected}"/>

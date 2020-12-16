@@ -11,9 +11,16 @@ namespace CollectionAdministration_WPF.States.AppStates
 
         public override bool IsLoadingSavedCountEnabled => true;
 
-        protected override IAppStates OnLoadSavedCounts(Action saveCount)
+        protected override IAppStates OnSaveCount(Action saveCount)
         {
             saveCount();
+
+            return this;
+        }
+
+        protected override IAppStates OnLoadSavedCounts(Action loadSavedCounts)
+        {
+            loadSavedCounts();
 
             return this;
         }

@@ -9,8 +9,8 @@ namespace CollectionAdministration_WPF.States.AppStates
         
         public override bool IsSavingEnabled => true;
         
-        public override bool IsLoadingSavedCountEnabled => true;
-        
+        public override bool IsCancelEditingSavedCountEnabled => true;
+
         protected override IAppStates OnSaveCount(Action saveCount)
         {
             saveCount();

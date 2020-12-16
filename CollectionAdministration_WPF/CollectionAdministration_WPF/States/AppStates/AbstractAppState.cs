@@ -10,6 +10,8 @@ namespace CollectionAdministration_WPF.States.AppStates
         public virtual bool IsSavingEnabled => false;
         
         public virtual bool IsLoadingSavedCountEnabled => false;
+
+        public virtual bool IsCancelEditingSavedCountEnabled => false;
         
         public virtual bool IsSavedCountSelected  => false;
 
