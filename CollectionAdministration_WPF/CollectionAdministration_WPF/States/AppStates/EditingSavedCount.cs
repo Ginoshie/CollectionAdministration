@@ -1,10 +1,13 @@
 ﻿using System;
+using CollectionAdministration_WPF.DTO;
 using Interfaces.States;
 
 namespace CollectionAdministration_WPF.States.AppStates
 {
     public class EditingSavedCount : AbstractAppState
     {
+        public EditingSavedCount(CollectionCount countSelectedInDataGrid) : base(countSelectedInDataGrid) { }
+
         public override string SaveButtonText => "Telling bijwerken";
         
         public override bool IsSavingEnabled => true;
@@ -15,14 +18,14 @@ namespace CollectionAdministration_WPF.States.AppStates
         {
             saveCount();
             
-            return new CreatingNewCount();
+            return new CreatingNewCount(CountSelectedInDataGrid);
         }
 
         protected override IAppStates OnCancelEditingSavedCount(Action createNewCount)
         {
             createNewCount();
             
-            return new CreatingNewCount();   
+            return new CreatingNewCount(CountSelectedInDataGrid);   
         }
     }
 }

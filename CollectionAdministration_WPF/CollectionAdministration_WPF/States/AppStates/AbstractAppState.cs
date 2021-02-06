@@ -1,10 +1,13 @@
 ﻿using System;
+using CollectionAdministration_WPF.DTO;
 using Interfaces.States;
 
 namespace CollectionAdministration_WPF.States.AppStates
 {
     public abstract class AbstractAppState : IAppStates
     {
+        protected CollectionCount CountSelectedInDataGrid;
+        
         public abstract string SaveButtonText { get; }
     
         public virtual bool IsSavingEnabled => false;
@@ -13,8 +16,13 @@ namespace CollectionAdministration_WPF.States.AppStates
 
         public virtual bool IsCancelEditingSavedCountEnabled => false;
         
-        public virtual bool IsSavedCountSelected  => false;
+        public virtual bool IsSavedCountSelected  => CountSelectedInDataGrid != null;
 
+        public AbstractAppState(CollectionCount countSelectedInDataGrid)
+        {
+            this.CountSelectedInDataGrid = countSelectedInDataGrid;
+        }
+        
         public IAppStates LoadSavedCounts(Action loadSavedCounts)      
         {
             return OnLoadSavedCounts(loadSavedCounts);

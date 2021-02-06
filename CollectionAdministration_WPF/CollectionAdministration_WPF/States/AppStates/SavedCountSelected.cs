@@ -1,10 +1,13 @@
 using System;
+using CollectionAdministration_WPF.DTO;
 using Interfaces.States;
 
 namespace CollectionAdministration_WPF.States.AppStates
 {
     public class SavedCountSelected : AbstractAppState
     {
+        public SavedCountSelected(CollectionCount countSelectedInDataGrid) : base(countSelectedInDataGrid) { }
+        
         public override string SaveButtonText => "Telling opslaan";
         
         public override bool IsSavingEnabled => true;
@@ -24,7 +27,7 @@ namespace CollectionAdministration_WPF.States.AppStates
         {
             deleteSelectedCount();
             
-            return new CreatingNewCount();
+            return new CreatingNewCount(CountSelectedInDataGrid);
         }
         
         protected override IAppStates OnViewSelectedCount(Action viewSelectedCount)
@@ -38,7 +41,7 @@ namespace CollectionAdministration_WPF.States.AppStates
         {
             editSelectedCount();
 
-            return new EditingSavedCount();
+            return new EditingSavedCount(CountSelectedInDataGrid);
         }
     }
 }

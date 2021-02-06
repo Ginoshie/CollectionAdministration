@@ -100,7 +100,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
             SetDefaultDescription();
             
-            AppState = new CreatingNewCount();
+            AppState = new CreatingNewCount(CountSelectedInDataGrid);
 
             GetSavedCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
