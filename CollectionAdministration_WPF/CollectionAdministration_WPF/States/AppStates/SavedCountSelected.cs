@@ -43,5 +43,14 @@ namespace CollectionAdministration_WPF.States.AppStates
 
             return new EditingSavedCount(CountSelectedInDataGrid);
         }
+
+        protected override IAppStates OnDeSelectSavedCount(Action clearSelectedCount)
+        {
+            clearSelectedCount();
+
+            CountSelectedInDataGrid = null;
+            
+            return new CreatingNewCount(CountSelectedInDataGrid);
+        }
     }
 }

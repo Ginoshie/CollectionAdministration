@@ -411,8 +411,7 @@
 
         <DataGrid Name="CollectionCountResultsDataGrid" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=CollectionCounts, Mode=OneWay}" 
                   SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False" Visibility="{Binding DataGridVisibility}" 
-                  ColumnHeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}" SelectedItem="{Binding Path=CountSelectedInDataGrid}"
-                  >
+                  ColumnHeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}" SelectedItem="{Binding Path=SavedCountSelectedInDataGrid}">
         <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum" Binding="{Binding DtCountDate, StringFormat=\{0:dddd dd-MM-yyyy\}}"/>
                 <DataGridTextColumn Header="Wijk" Binding="{Binding ChurchCommunity, Converter={StaticResource EnumDescriptionConverter}}"/>
@@ -431,8 +430,11 @@
                 <DataGridTextColumn Header="Euromunten" Binding="{Binding AmtEuroCoinsTotalValue}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
+                <i:EventTrigger EventName="GotFocus">
                     <i:InvokeCommandAction Command="{Binding SelectSavedCount}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding DeSelectSavedCount}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>

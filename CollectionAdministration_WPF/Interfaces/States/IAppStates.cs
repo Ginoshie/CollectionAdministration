@@ -26,6 +26,8 @@ namespace Interfaces.States
         IAppStates DeleteSelectedCount(Action deleteSelectedCount);
 
         IAppStates SelectSavedCount();
+        
+        IAppStates DeSelectSavedCount(Action clearSelectedCount);
 
         IAppStates CancelEditingSavedCount(Action createNewCount);
     }

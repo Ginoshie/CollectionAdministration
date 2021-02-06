@@ -100,7 +100,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
             SetDefaultDescription();
             
-            AppState = new CreatingNewCount(CountSelectedInDataGrid);
+            AppState = new CreatingNewCount(SavedCountSelectedInDataGrid);
 
             GetSavedCounts = new CommandHandler(ExecuteLoadCountsFlow);
 
@@ -115,6 +115,8 @@ namespace CollectionAdministration_WPF.ViewModel
             DeleteSelectedCount = new CommandHandler(ExecuteDeleteCountFlow);
             
             SelectSavedCount = new CommandHandler(ExecuteSelectSavedCountFlow);
+            
+            DeSelectSavedCount = new CommandHandler(ExecuteDeSelectSavedCountFlow);
         }
 
         #region Properties
@@ -710,7 +712,7 @@ namespace CollectionAdministration_WPF.ViewModel
             }
         }
 
-        public CollectionCount CountSelectedInDataGrid { get; set; }
+        public CollectionCount SavedCountSelectedInDataGrid { get; set; }
 
         public List<CollectionCount> CollectionCounts
         {
@@ -923,6 +925,8 @@ namespace CollectionAdministration_WPF.ViewModel
         public ICommand DeleteSelectedCount { get; set; }
         
         public ICommand SelectSavedCount { get; set; }
+        
+        public ICommand DeSelectSavedCount { get; set; }
         #endregion
 
         #region Flows
@@ -935,7 +939,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
         private void ExecuteUpdateCountFlow()
         {
-            AppState = AppState.SaveCount(() => DatabaseQueries.UpdateCount(CountSelectedInDataGrid.CollectionCountId, GetCountResultAsDictionary()));
+            AppState = AppState.SaveCount(() => DatabaseQueries.UpdateCount(SavedCountSelectedInDataGrid.CollectionCountId, GetCountResultAsDictionary()));
             
             ExecuteLoadCountsFlow();
         }
@@ -947,7 +951,7 @@ namespace CollectionAdministration_WPF.ViewModel
 
         private void ExecuteEditCountFlow()
         {
-            AppState = AppState.EditSelectedCount(() => FillCurrentCountFields(CountSelectedInDataGrid));
+            AppState = AppState.EditSelectedCount(() => FillCurrentCountFields(SavedCountSelectedInDataGrid));
             
             SaveCount = new CommandHandler(ExecuteUpdateCountFlow);
         }
@@ -961,14 +965,14 @@ namespace CollectionAdministration_WPF.ViewModel
         
         private void ExecuteViewCountFlow()
         {
-            AppState = AppState.ViewSelectedCount(() => FillCurrentCountFields(CountSelectedInDataGrid));
+            AppState = AppState.ViewSelectedCount(() => FillCurrentCountFields(SavedCountSelectedInDataGrid));
         }
 
         private void ExecuteDeleteCountFlow()
         {
             AppState = AppState.DeleteSelectedCount(() =>
             {
-                DatabaseQueries.DeleteCount(CountSelectedInDataGrid.CollectionCountId);
+                DatabaseQueries.DeleteCount(SavedCountSelectedInDataGrid.CollectionCountId);
 
                 ExecuteLoadCountsFlow();
             });
@@ -977,6 +981,11 @@ namespace CollectionAdministration_WPF.ViewModel
         private void ExecuteSelectSavedCountFlow()
         {
             AppState = AppState.SelectSavedCount();
+        }
+        
+        private void ExecuteDeSelectSavedCountFlow()
+        {
+            AppState = AppState.DeSelectSavedCount(() => SavedCountSelectedInDataGrid = null);
         }
         #endregion
 

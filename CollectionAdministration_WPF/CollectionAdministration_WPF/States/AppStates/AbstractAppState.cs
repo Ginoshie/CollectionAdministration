@@ -53,6 +53,11 @@ namespace CollectionAdministration_WPF.States.AppStates
             return OnSelectSavedCount();
         }
 
+        public IAppStates DeSelectSavedCount(Action clearSelectedCount)
+        {
+            return OnDeSelectSavedCount(clearSelectedCount);
+        }
+
         public IAppStates CancelEditingSavedCount(Action createNewCount)
         { 
             return OnCancelEditingSavedCount(createNewCount);
@@ -70,6 +75,8 @@ namespace CollectionAdministration_WPF.States.AppStates
         
         protected virtual IAppStates OnSelectSavedCount() => this;
 
+        protected virtual IAppStates OnDeSelectSavedCount(Action clearSelectedCount) => this;
+        
         protected virtual IAppStates OnCancelEditingSavedCount(Action createNewCount) => this;
     }
 }

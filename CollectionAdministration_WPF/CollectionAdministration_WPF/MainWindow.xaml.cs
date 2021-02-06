@@ -25,5 +25,10 @@ namespace CollectionAdministration_WPF
 
             DataContext = new CollectionAdministrationViewModel();
         }
+
+        private void CollectionCountResultsDataGrid_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
     }
 }
