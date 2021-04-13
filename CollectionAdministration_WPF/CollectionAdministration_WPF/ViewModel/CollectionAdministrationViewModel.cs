@@ -115,8 +115,8 @@ namespace CollectionAdministration_WPF.ViewModel
             DeleteSelectedCount = new CommandHandler(ExecuteDeleteCountFlow);
             
             SelectSavedCount = new CommandHandler(ExecuteSelectSavedCountFlow);
-            
-            DeSelectSavedCount = new CommandHandler(ExecuteDeSelectSavedCountFlow);
+
+            LostFocusSavedCount = new CommandHandler(LoseFocusSavedCount);
         }
 
         #region Properties
@@ -925,8 +925,9 @@ namespace CollectionAdministration_WPF.ViewModel
         public ICommand DeleteSelectedCount { get; set; }
         
         public ICommand SelectSavedCount { get; set; }
-        
-        public ICommand DeSelectSavedCount { get; set; }
+
+        public ICommand LostFocusSavedCount { get; set; }
+
         #endregion
 
         #region Flows
@@ -982,10 +983,10 @@ namespace CollectionAdministration_WPF.ViewModel
         {
             AppState = AppState.SelectSavedCount();
         }
-        
-        private void ExecuteDeSelectSavedCountFlow()
+
+        private void LoseFocusSavedCount()
         {
-            AppState = AppState.DeSelectSavedCount(() => SavedCountSelectedInDataGrid = null);
+            AppState = AppState.LoseFocusOnSavedCount();
         }
         #endregion
 

@@ -30,5 +30,7 @@ namespace Interfaces.States
         IAppStates DeSelectSavedCount(Action clearSelectedCount);
 
         IAppStates CancelEditingSavedCount(Action createNewCount);
+        
+        IAppStates LoseFocusOnSavedCount();
     }
 }

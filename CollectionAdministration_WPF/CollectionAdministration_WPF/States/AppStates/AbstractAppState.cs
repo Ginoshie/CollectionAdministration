@@ -63,6 +63,11 @@ namespace CollectionAdministration_WPF.States.AppStates
             return OnCancelEditingSavedCount(createNewCount);
         }
 
+        public IAppStates LoseFocusOnSavedCount()
+        {
+            return OnLoseFocusSavedCount();
+        }
+
         protected virtual IAppStates OnLoadSavedCounts(Action loadSavedCounts) => this;
 
         protected virtual IAppStates OnSaveCount(Action saveCount) => this;
@@ -78,5 +83,7 @@ namespace CollectionAdministration_WPF.States.AppStates
         protected virtual IAppStates OnDeSelectSavedCount(Action clearSelectedCount) => this;
         
         protected virtual IAppStates OnCancelEditingSavedCount(Action createNewCount) => this;
+
+        protected virtual IAppStates OnLoseFocusSavedCount() => this;
     }
 }

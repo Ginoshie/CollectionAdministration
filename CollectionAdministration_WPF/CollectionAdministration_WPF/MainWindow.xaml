@@ -14,83 +14,84 @@
         Title="MainWindow" Height="670" Width="845" MinHeight="670" MinWidth="845" ResizeMode="CanResize">
 
     <Window.Resources>
-        <converter:EnumToDescriptionConverter x:Key="EnumDescriptionConverter"/>
+        <converter:EnumToDescriptionConverter x:Key="EnumDescriptionConverter" />
 
         <ObjectDataProvider x:Key="ChurchCommunities"
                             MethodName="GetValues" ObjectType="{x:Type enums:ChurchCommunity}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="enums:ChurchCommunity"/>
+                <x:Type TypeName="enums:ChurchCommunity" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
         <ObjectDataProvider x:Key="CollectionRounds"
                             MethodName="GetValues" ObjectType="{x:Type enums:CollectionRound}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="enums:CollectionRound"/>
+                <x:Type TypeName="enums:CollectionRound" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
         <DataTemplate x:Key="ShowEnumDescriptionComboBoxTemplate">
-            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
         </DataTemplate>
 
         <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
             <Style.Setters>
-                <Setter Property="Margin" Value="3,0,3,1"/>
-                <Setter Property="Padding" Value="0,0,0,0"/>
+                <Setter Property="Margin" Value="3,0,3,1" />
+                <Setter Property="Padding" Value="0,0,0,0" />
             </Style.Setters>
         </Style>
 
         <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
             <Style.Setters>
-                <Setter Property="Padding" Value="0,0,2,0"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="0,0,2,0" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
             </Style.Setters>
         </Style>
 
         <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
             <Style.Setters>
-                <Setter Property="Margin" Value="1"/>
-                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/>
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="ComboboxStyle" TargetType="{x:Type ComboBox}">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
 
         <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="Padding" Value="3" />
         </Style>
 
         <Style x:Key="CenterAlignmentColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
 
     </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="235"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="235" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="65"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="65" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="0" Width="235" HorizontalAlignment="Left" Grid.RowSpan="2">
@@ -99,41 +100,43 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" Content="Datum:" Style="{StaticResource LabelStyle}"/>
-                    <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DtCountDate}"/>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Datum:" Style="{StaticResource LabelStyle}" />
+                    <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DtCountDate}" />
 
-                    <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray" Text="{Binding Path=DayOfCountDate, Mode=OneWay}" 
-                             Style="{StaticResource TextBoxStyle}" IsReadOnly="True" IsTabStop="False"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray"
+                             Text="{Binding Path=DayOfCountDate, Mode=OneWay}"
+                             Style="{StaticResource TextBoxStyle}" IsReadOnly="True" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Wijk:" Style="{StaticResource LabelStyle}" />
                     <ComboBox Grid.Column="1" Grid.Row="2" Style="{StaticResource ComboboxStyle}"
                               ItemsSource="{Binding Source={StaticResource ChurchCommunities}}"
                               SelectedItem="{Binding Path=ChurchCommunity}"
-                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}"/>
+                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}" />
 
 
-                    <Label Grid.Column="0" Grid.Row="3" Content="Collecte:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Collecte:" Style="{StaticResource LabelStyle}" />
                     <ComboBox Grid.Column="1" Grid.Row="3" Style="{StaticResource ComboboxStyle}"
                               ItemsSource="{Binding Source={StaticResource CollectionRounds}}"
                               SelectedItem="{Binding Path=CollectionRound}"
-                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}"/>
+                              ItemTemplate="{StaticResource ShowEnumDescriptionComboBoxTemplate}" />
 
 
-                    <Label Grid.Column="0" Grid.Row="4" Content="Beschrijving:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Path=Description}" Style="{StaticResource TextBoxStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="Beschrijving:" Style="{StaticResource LabelStyle}" />
+                    <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Path=Description}"
+                             Style="{StaticResource TextBoxStyle}" />
 
                 </Grid>
 
@@ -143,77 +146,88 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
-                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
+                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
 
-                    <Label Grid.Column="0" Grid.Row="1" Content="Geel:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="Geel:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtYellowCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtYellowCollectionCoinTotalValue, Mode=OneWay}"  IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtYellowCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="2" Content="Groen:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Groen:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtGreenCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtGreenCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtGreenCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="3" Content="Rood:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Rood:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtRedCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtRedCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtRedCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="4" Content="Blauw:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="Blauw:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtBlueCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtBlueCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtBlueCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="5" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtCollectionCoinsTotalValue}" 
-                             Style="{StaticResource TextBoxStyle}" IsTabStop="False"/>
+                    <Label Grid.Column="0" Grid.Row="5" Content="Totaal:" Style="{StaticResource LabelStyle}" />
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Background="LightGray" IsReadOnly="True"
+                             Text="{Binding Path=AmtCollectionCoinsTotalValue}"
+                             Style="{StaticResource TextBoxStyle}" IsTabStop="False" />
 
                 </Grid>
 
@@ -223,105 +237,120 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
-                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="1" Grid.Row="0" Content="Aantal" HorizontalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
+                    <Label Grid.Column="2" Grid.Row="0" Content="Totaal" HorizontalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
 
-                    <Label Grid.Column="0" Grid.Row="1" Content="5 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="5 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtFiveEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtFiveEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtFiveEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="2" Content="10 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="10 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTenEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtTenEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtTenEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="3" Content="20 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="20 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTwentyEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtTwentyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtTwentyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="4" Content="50 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="50 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtFiftyEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtFiftyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtFiftyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="5" Content="100 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="5" Content="100 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtHundredEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtHundredEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtHundredEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="6" Content="200 euro:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Grid.Row="6" Content="200 euro:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTwoHundredEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveIntegerAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveIntegerAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <TextBox Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Background="LightGray" IsReadOnly="True" 
-                             Text="{Binding Path=AmtTwoHundredEuroBillTotalValue, Mode=OneWay}" IsTabStop="False"/>
+                    <TextBox Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBoxStyle}" Background="LightGray"
+                             IsReadOnly="True"
+                             Text="{Binding Path=AmtTwoHundredEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
-                    <Label Grid.Column="0" Grid.Row="7" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtEuroBillsTotalValue}" 
-                             Style="{StaticResource TextBoxStyle}" IsTabStop="False"/>
+                    <Label Grid.Column="0" Grid.Row="7" Content="Totaal:" Style="{StaticResource LabelStyle}" />
+                    <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True"
+                             Text="{Binding Path=AmtEuroBillsTotalValue}"
+                             Style="{StaticResource TextBoxStyle}" IsTabStop="False" />
 
                 </Grid>
 
@@ -331,20 +360,21 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Column="0" Content="Totaal:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtEuroCoinsTotalValue" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
-                                    <validation:NullOrPositiveDoubleAsStringValidationRule ValidationStep="CommittedValue"/>
+                                    <validation:NullOrPositiveDoubleAsStringValidationRule
+                                        ValidationStep="CommittedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -356,85 +386,108 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Content="Totaal:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True" Text="{Binding Path=AmtCollectionTotalValue}" 
-                             Style="{StaticResource TextBoxStyle}" IsTabStop="False"/>
+                    <Label Grid.Column="0" Content="Totaal:" Style="{StaticResource LabelStyle}" />
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Background="LightGray" IsReadOnly="True"
+                             Text="{Binding Path=AmtCollectionTotalValue}"
+                             Style="{StaticResource TextBoxStyle}" IsTabStop="False" />
 
                 </Grid>
 
             </GroupBox>
-
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GotFocus">
+                    <i:InvokeCommandAction Command="{Binding LostFocusSavedCount}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </StackPanel>
 
-        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties huidige en opgeslagen tellingen" Style="{StaticResource GroupBoxStyle}">
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Acties huidige en opgeslagen tellingen"
+                  Style="{StaticResource GroupBoxStyle}">
 
             <UniformGrid Columns="7">
 
-                <Button Content="{Binding AppState.SaveButtonText}" Command="{Binding Path=SaveCount}" Style="{StaticResource ButtonStyle}" 
-                        IsEnabled="{Binding AppState.IsSavingEnabled}"/>
+                <Button Content="{Binding AppState.SaveButtonText}"
+                        Command="{Binding Path=SaveCount}"
+                        Style="{StaticResource ButtonStyle}"
+                        IsEnabled="{Binding AppState.IsSavingEnabled}" />
 
-                <Button Content="Tellingen opvragen" Command="{Binding Path=GetSavedCounts}" Style="{StaticResource ButtonStyle}" 
-                        IsEnabled="{Binding AppState.IsLoadingSavedCountEnabled}"/>
+                <Button Content="Tellingen opvragen"
+                        Command="{Binding Path=GetSavedCounts}"
+                        Style="{StaticResource ButtonStyle}"
+                        IsEnabled="{Binding AppState.IsLoadingSavedCountEnabled}" />
 
                 <StackPanel>
 
-                    <Label Content="Filter: Datum" HorizontalAlignment="Center" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
+                    <Label Content="Filter: Datum" HorizontalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" />
 
                 </StackPanel>
 
-                <Button Content="Bekijk telling" Style="{StaticResource ButtonStyle}" Command="{Binding ViewSelectedCount}" 
-                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
+                <Button Content="Bekijk telling"
+                        Command="{Binding Path=ViewSelectedCount}"
+                        Style="{StaticResource ButtonStyle}"
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}" />
 
-                <Button Content="Telling aanpassen" Style="{StaticResource ButtonStyle}" Command="{Binding EditSelectedCount}"
-                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
-                
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelEditingSavedCount}"
+                <Button Content="Telling aanpassen"
+                        Command="{Binding Path=EditSelectedCount}"
+                        Style="{StaticResource ButtonStyle}"
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}" />
+
+                <Button Style="{StaticResource ButtonStyle}"
+                        Command="{Binding Path=CancelEditingSavedCount}"
                         IsEnabled="{Binding AppState.IsCancelEditingSavedCountEnabled}">
-                    <TextBlock Text="Aanpassen annuleren" TextWrapping="Wrap"/>
+                    <TextBlock Text="Aanpassen annuleren" TextWrapping="Wrap" />
                 </Button>
 
-                <Button Content="Verwijder telling" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteSelectedCount}"
-                        IsEnabled="{Binding AppState.IsSavedCountSelected}"/>
+                <Button Content="Verwijder telling"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="{Binding Path=DeleteSelectedCount}"
+                        IsEnabled="{Binding AppState.IsSavedCountSelected}" />
 
             </UniformGrid>
 
         </GroupBox>
 
-        <DataGrid Name="CollectionCountResultsDataGrid" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=CollectionCounts, Mode=OneWay}" 
-                  SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False" Visibility="{Binding DataGridVisibility}" 
-                  ColumnHeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}" SelectedItem="{Binding Path=SavedCountSelectedInDataGrid}">
-        <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding DtCountDate, StringFormat=\{0:dddd dd-MM-yyyy\}}"/>
-                <DataGridTextColumn Header="Wijk" Binding="{Binding ChurchCommunity, Converter={StaticResource EnumDescriptionConverter}}"/>
-                <DataGridTextColumn Header="Collecte" Binding="{Binding CollectionRound, Converter={StaticResource EnumDescriptionConverter}}"/>
-                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="Geel" Binding="{Binding AmtYellowCollectionCoin}"/>
-                <DataGridTextColumn Header="Groen" Binding="{Binding AmtGreenCollectionCoin}"/>
-                <DataGridTextColumn Header="Rood" Binding="{Binding AmtRedCollectionCoin}"/>
-                <DataGridTextColumn Header="Blauw" Binding="{Binding AmtBlueCollectionCoin}"/>
-                <DataGridTextColumn Header="5 euro" Binding="{Binding AmtFiveEuroBill}"/>
-                <DataGridTextColumn Header="10 euro" Binding="{Binding AmtTenEuroBill}"/>
-                <DataGridTextColumn Header="20 euro" Binding="{Binding AmtTwentyEuroBill}"/>
-                <DataGridTextColumn Header="50 euro" Binding="{Binding AmtFiftyEuroBill}"/>
-                <DataGridTextColumn Header="100 euro" Binding="{Binding AmtHundredEuroBill}"/>
-                <DataGridTextColumn Header="200 euro" Binding="{Binding AmtTwoHundredEuroBill}"/>
-                <DataGridTextColumn Header="Euromunten" Binding="{Binding AmtEuroCoinsTotalValue}"/>
+        <DataGrid Name="CollectionCountResultsDataGrid" Grid.Column="1" Grid.Row="0"
+                  ItemsSource="{Binding Path=CollectionCounts, Mode=OneWay}"
+                  SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False"
+                  Visibility="{Binding DataGridVisibility}"
+                  ColumnHeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}"
+                  SelectedItem="{Binding Path=SavedCountSelectedInDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum" Binding="{Binding DtCountDate, StringFormat=\{0:dddd dd-MM-yyyy\}}" />
+                <DataGridTextColumn Header="Wijk"
+                                    Binding="{Binding ChurchCommunity, Converter={StaticResource EnumDescriptionConverter}}" />
+                <DataGridTextColumn Header="Collecte"
+                                    Binding="{Binding CollectionRound, Converter={StaticResource EnumDescriptionConverter}}" />
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="Geel" Binding="{Binding AmtYellowCollectionCoin}" />
+                <DataGridTextColumn Header="Groen" Binding="{Binding AmtGreenCollectionCoin}" />
+                <DataGridTextColumn Header="Rood" Binding="{Binding AmtRedCollectionCoin}" />
+                <DataGridTextColumn Header="Blauw" Binding="{Binding AmtBlueCollectionCoin}" />
+                <DataGridTextColumn Header="5 euro" Binding="{Binding AmtFiveEuroBill}" />
+                <DataGridTextColumn Header="10 euro" Binding="{Binding AmtTenEuroBill}" />
+                <DataGridTextColumn Header="20 euro" Binding="{Binding AmtTwentyEuroBill}" />
+                <DataGridTextColumn Header="50 euro" Binding="{Binding AmtFiftyEuroBill}" />
+                <DataGridTextColumn Header="100 euro" Binding="{Binding AmtHundredEuroBill}" />
+                <DataGridTextColumn Header="200 euro" Binding="{Binding AmtTwoHundredEuroBill}" />
+                <DataGridTextColumn Header="Euromunten" Binding="{Binding AmtEuroCoinsTotalValue}" />
             </DataGrid.Columns>
             <i:Interaction.Triggers>
+                <!-- <i:EventTrigger EventName="LostFocus"> -->
+                <!--     <i:InvokeCommandAction Command="{Binding LostFocusSavedCount}" /> -->
+                <!-- </i:EventTrigger> -->
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction Command="{Binding SelectSavedCount}"/>
-                </i:EventTrigger>
-                <i:EventTrigger EventName="LostFocus">
-                    <i:InvokeCommandAction Command="{Binding DeSelectSavedCount}"/>
+                    <i:InvokeCommandAction Command="{Binding SelectSavedCount}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>

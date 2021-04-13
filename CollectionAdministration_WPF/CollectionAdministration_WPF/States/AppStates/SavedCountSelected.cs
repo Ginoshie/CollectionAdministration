@@ -52,5 +52,10 @@ namespace CollectionAdministration_WPF.States.AppStates
             
             return new CreatingNewCount(CountSelectedInDataGrid);
         }
+
+        protected override IAppStates OnLoseFocusSavedCount()
+        {
+            return new CreatingNewCount(CountSelectedInDataGrid);
+        }
     }
 }
