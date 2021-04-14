@@ -88,7 +88,7 @@ namespace CollectionAdministration_WPF
         {
             var collectionCountsList = new List<CollectionCount>();
 
-            var selectAllCountsQuery = $"select * from CollectionCount;";
+            var selectAllCountsQuery = "select * from CollectionCount;";
 
             using var connection = new OleDbConnection(ConnectionString);
             
@@ -104,12 +104,11 @@ namespace CollectionAdministration_WPF
             }
 
             return collectionCountsList;
-            ;
         }
 
         private static CollectionCount GetCountCollectionFromDataReaderFields(OleDbDataReader reader)
         {
-            return new CollectionCount()
+            return new CollectionCount
             {
                 CollectionCountId = reader.GetInt32(reader.GetOrdinal("CollectionCountId")),
                 DtCountDate = reader.GetDateTime(reader.GetOrdinal("DtCountDate")),
