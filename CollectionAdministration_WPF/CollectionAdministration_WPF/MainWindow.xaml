@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CollectionAdministration_WPF"
         xmlns:converter="clr-namespace:CollectionAdministration_WPF.Converter"
         xmlns:validation="clr-namespace:CollectionAdministration_WPF.Validation"
         xmlns:enums="clr-namespace:CollectionAdministration_WPF.Enums"
@@ -483,9 +482,6 @@
                 <DataGridTextColumn Header="Euromunten" Binding="{Binding AmtEuroCoinsTotalValue}" />
             </DataGrid.Columns>
             <i:Interaction.Triggers>
-                <!-- <i:EventTrigger EventName="LostFocus"> -->
-                <!--     <i:InvokeCommandAction Command="{Binding LostFocusSavedCount}" /> -->
-                <!-- </i:EventTrigger> -->
                 <i:EventTrigger EventName="GotFocus">
                     <i:InvokeCommandAction Command="{Binding SelectSavedCount}" />
                 </i:EventTrigger>
