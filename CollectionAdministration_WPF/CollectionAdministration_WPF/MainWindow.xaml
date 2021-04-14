@@ -469,16 +469,16 @@
                 <DataGridTextColumn Header="Collecte"
                                     Binding="{Binding CollectionRound, Converter={StaticResource EnumDescriptionConverter}}" />
                 <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" />
-                <DataGridTextColumn Header="Geel" Binding="{Binding AmtYellowCollectionCoin}" />
-                <DataGridTextColumn Header="Groen" Binding="{Binding AmtGreenCollectionCoin}" />
-                <DataGridTextColumn Header="Rood" Binding="{Binding AmtRedCollectionCoin}" />
-                <DataGridTextColumn Header="Blauw" Binding="{Binding AmtBlueCollectionCoin}" />
-                <DataGridTextColumn Header="5 euro" Binding="{Binding AmtFiveEuroBill}" />
-                <DataGridTextColumn Header="10 euro" Binding="{Binding AmtTenEuroBill}" />
-                <DataGridTextColumn Header="20 euro" Binding="{Binding AmtTwentyEuroBill}" />
-                <DataGridTextColumn Header="50 euro" Binding="{Binding AmtFiftyEuroBill}" />
-                <DataGridTextColumn Header="100 euro" Binding="{Binding AmtHundredEuroBill}" />
-                <DataGridTextColumn Header="200 euro" Binding="{Binding AmtTwoHundredEuroBill}" />
+                <DataGridTextColumn Header="Geel" Binding="{Binding CollectionCoins.AmtYellowCollectionCoin}" />
+                <DataGridTextColumn Header="Groen" Binding="{Binding CollectionCoins.AmtGreenCollectionCoin}" />
+                <DataGridTextColumn Header="Rood" Binding="{Binding CollectionCoins.AmtRedCollectionCoin}" />
+                <DataGridTextColumn Header="Blauw" Binding="{Binding CollectionCoins.AmtBlueCollectionCoin}" />
+                <DataGridTextColumn Header="5 euro" Binding="{Binding EuroBills.AmtFiveEuroBill}" />
+                <DataGridTextColumn Header="10 euro" Binding="{Binding EuroBills.AmtTenEuroBill}" />
+                <DataGridTextColumn Header="20 euro" Binding="{Binding EuroBills.AmtTwentyEuroBill}" />
+                <DataGridTextColumn Header="50 euro" Binding="{Binding EuroBills.AmtFiftyEuroBill}" />
+                <DataGridTextColumn Header="100 euro" Binding="{Binding EuroBills.AmtHundredEuroBill}" />
+                <DataGridTextColumn Header="200 euro" Binding="{Binding EuroBills.AmtTwoHundredEuroBill}" />
                 <DataGridTextColumn Header="Euromunten" Binding="{Binding AmtEuroCoinsTotalValue}" />
             </DataGrid.Columns>
             <i:Interaction.Triggers>

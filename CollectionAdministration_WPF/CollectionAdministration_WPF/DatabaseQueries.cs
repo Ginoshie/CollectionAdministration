@@ -17,7 +17,7 @@ namespace CollectionAdministration_WPF
 
         public static void InsertCountResult(Dictionary<string, string> countResult)
         {
-            if(countResult.Count != 15)
+            if (countResult.Count != 15)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -29,7 +29,7 @@ namespace CollectionAdministration_WPF
             var insertCountQuery = $"insert into CollectionCount ({fields}) values ({formattedValues});";
 
             using var connection = new OleDbConnection(ConnectionString);
-            
+
             OleDbCommand cmd = new OleDbCommand(insertCountQuery, connection);
 
             connection.Open();
@@ -44,7 +44,7 @@ namespace CollectionAdministration_WPF
             string deleteCountQuery = $"delete from CollectionCount where collectionCountId={pkCountResult};";
 
             using var connection = new OleDbConnection(ConnectionString);
-            
+
             var command = new OleDbCommand(deleteCountQuery, connection);
 
             connection.Open();
@@ -56,24 +56,24 @@ namespace CollectionAdministration_WPF
 
         public static void UpdateCount(int pkCount, Dictionary<string, string> countResult)
         {
-            if(countResult.Count != 15)
+            if (countResult.Count != 15)
             {
                 throw new IndexOutOfRangeException();
             }
 
             var fieldValuePairs = new List<string>();
-            
+
             foreach (var kvp in countResult)
             {
                 fieldValuePairs.Add(kvp.Key + " = " + kvp.Value);
             }
 
             var setClause = string.Join(", ", fieldValuePairs);
-            
+
             var updateCountQuery = $"update CollectionCount set {setClause} where CollectionCountId = {pkCount};";
 
             using var connection = new OleDbConnection(ConnectionString);
-            
+
             var cmd = new OleDbCommand(updateCountQuery, connection);
 
             connection.Open();
@@ -90,7 +90,7 @@ namespace CollectionAdministration_WPF
             var selectAllCountsQuery = "select * from CollectionCount;";
 
             using var connection = new OleDbConnection(ConnectionString);
-            
+
             var command = new OleDbCommand(selectAllCountsQuery, connection);
 
             connection.Open();
@@ -111,19 +111,27 @@ namespace CollectionAdministration_WPF
             {
                 CollectionCountId = reader.GetInt32(reader.GetOrdinal("CollectionCountId")),
                 DtCountDate = reader.GetDateTime(reader.GetOrdinal("DtCountDate")),
-                ChurchCommunity = (ChurchCommunity)Enum.Parse(typeof(ChurchCommunity), reader.GetString(reader.GetOrdinal("ChurchCommunity"))),
-                CollectionRound = (CollectionRound)Enum.Parse(typeof(CollectionRound), reader.GetString(reader.GetOrdinal("CollectionRound"))),
+                ChurchCommunity = (ChurchCommunity) Enum.Parse(typeof(ChurchCommunity),
+                    reader.GetString(reader.GetOrdinal("ChurchCommunity"))),
+                CollectionRound = (CollectionRound) Enum.Parse(typeof(CollectionRound),
+                    reader.GetString(reader.GetOrdinal("CollectionRound"))),
                 Description = reader.GetString(reader.GetOrdinal("Description")),
-                AmtYellowCollectionCoin = reader.GetString(reader.GetOrdinal("AmtYellowCollectionCoin")),
-                AmtGreenCollectionCoin = reader.GetString(reader.GetOrdinal("AmtGreenCollectionCoin")),
-                AmtRedCollectionCoin = reader.GetString(reader.GetOrdinal("AmtRedCollectionCoin")),
-                AmtBlueCollectionCoin = reader.GetString(reader.GetOrdinal("AmtBlueCollectionCoin")),
-                AmtFiveEuroBill = reader.GetString(reader.GetOrdinal("AmtFiveEuroBill")),
-                AmtTenEuroBill = reader.GetString(reader.GetOrdinal("AmtTenEuroBill")),
-                AmtTwentyEuroBill = reader.GetString(reader.GetOrdinal("AmtTwentyEuroBill")),
-                AmtFiftyEuroBill = reader.GetString(reader.GetOrdinal("AmtFiftyEuroBill")),
-                AmtHundredEuroBill = reader.GetString(reader.GetOrdinal("AmtHundredEuroBill")),
-                AmtTwoHundredEuroBill = reader.GetString(reader.GetOrdinal("AmtTwoHundredEuroBill")),
+                CollectionCoins =
+                {
+                    AmtYellowCollectionCoin = reader.GetString(reader.GetOrdinal("AmtYellowCollectionCoin")),
+                    AmtGreenCollectionCoin = reader.GetString(reader.GetOrdinal("AmtGreenCollectionCoin")),
+                    AmtRedCollectionCoin = reader.GetString(reader.GetOrdinal("AmtRedCollectionCoin")),
+                    AmtBlueCollectionCoin = reader.GetString(reader.GetOrdinal("AmtBlueCollectionCoin"))
+                },
+                EuroBills =
+                {
+                    AmtFiveEuroBill = reader.GetString(reader.GetOrdinal("AmtFiveEuroBill")),
+                    AmtTenEuroBill = reader.GetString(reader.GetOrdinal("AmtTenEuroBill")),
+                    AmtTwentyEuroBill = reader.GetString(reader.GetOrdinal("AmtTwentyEuroBill")),
+                    AmtFiftyEuroBill = reader.GetString(reader.GetOrdinal("AmtFiftyEuroBill")),
+                    AmtHundredEuroBill = reader.GetString(reader.GetOrdinal("AmtHundredEuroBill")),
+                    AmtTwoHundredEuroBill = reader.GetString(reader.GetOrdinal("AmtTwoHundredEuroBill"))
+                },
                 AmtEuroCoinsTotalValue = reader.GetString(reader.GetOrdinal("AmtEuroCoinsTotalValue"))
             };
         }

@@ -73,7 +73,9 @@
     <Compile Include="Converter\NullableDoubleToStringConverter.cs" />
     <Compile Include="Converter\NullableIntToStringConverter.cs" />
     <Compile Include="DatabaseQueries.cs" />
+    <Compile Include="DTO\CollectionCoins.cs" />
     <Compile Include="DTO\CollectionCount.cs" />
+    <Compile Include="DTO\EuroBills.cs" />
     <Compile Include="Enums\ChurchCommunity.cs" />
     <Compile Include="Enums\CollectionCoin.cs" />
     <Compile Include="Enums\CollectionRound.cs" />
