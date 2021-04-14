@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
-using System.Linq;
 using CollectionAdministration_WPF.DTO;
 using CollectionAdministration_WPF.Enums;
 
