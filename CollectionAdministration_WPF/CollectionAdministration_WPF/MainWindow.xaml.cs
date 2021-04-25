@@ -22,12 +22,11 @@ namespace CollectionAdministration_WPF
 
             InitializeComponent();
 
-            DataContext = new CollectionAdministrationViewModel();
-        }
+            var dataContext = new CollectionAdministrationViewModel();
+            
+            DataContext = dataContext;
 
-        private void CollectionCountResultsDataGrid_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            return;
+            dataContext.GetSavedCounts.Execute(this);
         }
     }
 }
