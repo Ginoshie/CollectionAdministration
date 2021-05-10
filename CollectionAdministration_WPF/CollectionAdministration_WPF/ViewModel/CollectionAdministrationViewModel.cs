@@ -988,7 +988,7 @@ namespace CollectionAdministration_WPF.ViewModel
                 {nameof(AmtYellowCollectionCoin), AmtYellowCollectionCoin.Replace(",", ".")},
                 {nameof(AmtGreenCollectionCoin), AmtGreenCollectionCoin.Replace(",", ".")},
                 {nameof(AmtRedCollectionCoin), AmtRedCollectionCoin.Replace(",", ".")},
-                {nameof(AmtBlueCollectionCoin), AmtRedCollectionCoin.Replace(",", ".")},
+                {nameof(AmtBlueCollectionCoin), AmtBlueCollectionCoin.Replace(",", ".")},
                 // Euro bills
                 {nameof(AmtFiveEuroBill), AmtFiveEuroBill.Replace(",", ".")},
                 {nameof(AmtTenEuroBill), AmtTenEuroBill.Replace(",", ".")},
