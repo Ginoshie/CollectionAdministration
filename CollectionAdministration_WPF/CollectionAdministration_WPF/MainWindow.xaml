@@ -112,7 +112,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Column="0" Grid.Row="0" Content="Datum:" Style="{StaticResource LabelStyle}" />
-                    <DatePicker Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DtCountDate}" />
+                    <DatePicker Name="DatePicker" Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Path=DtCountDate}" />
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Dag:" Style="{StaticResource LabelStyle}" />
                     <TextBox Grid.Column="1" Grid.Row="1" Background="LightGray"
@@ -164,7 +164,7 @@
                            Style="{StaticResource LabelStyle}" />
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Geel:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="YellowCollectionCoin" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtYellowCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -179,7 +179,7 @@
                              Text="{Binding Path=AmtYellowCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="2" Content="Groen:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="GreenCollectionCoin" Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtGreenCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -194,7 +194,7 @@
                              Text="{Binding Path=AmtGreenCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="3" Content="Rood:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="RedCollectionCoin" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtRedCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -209,7 +209,7 @@
                              Text="{Binding Path=AmtRedCollectionCoinTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="4" Content="Blauw:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="BlueCollectionCoin" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtBlueCollectionCoin" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -257,7 +257,7 @@
                            Style="{StaticResource LabelStyle}" />
 
                     <Label Grid.Column="0" Grid.Row="1" Content="5 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="FiveEuro" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtFiveEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -272,7 +272,7 @@
                              Text="{Binding Path=AmtFiveEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="2" Content="10 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="TenEuro" Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTenEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -287,7 +287,7 @@
                              Text="{Binding Path=AmtTenEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="3" Content="20 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="TwentyEuro" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTwentyEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -302,7 +302,7 @@
                              Text="{Binding Path=AmtTwentyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="4" Content="50 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="FiftyEuro" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtFiftyEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -317,7 +317,7 @@
                              Text="{Binding Path=AmtFiftyEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="5" Content="100 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="HundredEuro" Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtHundredEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -332,7 +332,7 @@
                              Text="{Binding Path=AmtHundredEuroBillTotalValue, Mode=OneWay}" IsTabStop="False" />
 
                     <Label Grid.Column="0" Grid.Row="6" Content="200 euro:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="TwoHundredEuro" Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtTwoHundredEuroBill" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -368,7 +368,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Column="0" Content="Totaal:" Style="{StaticResource LabelStyle}" />
-                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}">
+                    <TextBox Name="EuroCoins" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}">
                         <TextBox.Text>
                             <Binding Path="AmtEuroCoinsTotalValue" UpdateSourceTrigger="LostFocus">
                                 <Binding.ValidationRules>
@@ -414,9 +414,33 @@
             <UniformGrid Columns="7">
 
                 <Button Content="{Binding AppState.SaveButtonText}"
-                        Command="{Binding Path=SaveCount}"
-                        Style="{StaticResource ButtonStyle}"
-                        IsEnabled="{Binding AppState.IsSavingEnabled}" />
+                        Command="{Binding Path=SaveCount}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource  ButtonStyle}">
+                            <Setter Property="IsEnabled" Value="false" />
+                            <Style.Triggers>
+                                <!-- Require the controls to be valid in order to press OK -->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=DatePicker, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=YellowCollectionCoin, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=GreenCollectionCoin, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=RedCollectionCoin, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=BlueCollectionCoin, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=FiveEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=TenEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=TwentyEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=FiftyEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=HundredEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=TwoHundredEuro, Path=(Validation.HasError)}" Value="false" />
+                                        <Condition Binding="{Binding ElementName=EuroCoins, Path=(Validation.HasError)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="true" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
                 <Button Content="Tellingen opvragen"
                         Command="{Binding Path=GetSavedCounts}"
